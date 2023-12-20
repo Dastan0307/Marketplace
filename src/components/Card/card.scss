@@ -1,0 +1,107 @@
+@font-face {
+    font-family: 'Gotham Pro';
+    src:
+        url('../../assets/fonts/Gotham Pro/gothampro.ttf') format('truetype');  
+    font-style: normal;
+  }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.card {
+    width: 154px;
+    height: 184px;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Gotham Pro', sans-serif;
+    margin: 10px 0;
+
+    .card__description {
+        width: 142px;
+        height: 34px;
+        font-family: 'Gotham Pro', sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        color: rgba(0, 0, 0, 1);
+        margin-top: 3px;
+    }
+
+    .card__description_price {
+        font-family: 'Gotham Pro', sans-serif;
+        font-weight: 600;
+        font-size: 14px;
+        color: rgba(93, 95, 239, 1);
+        text-align: end;
+        margin-right: 75px;
+        margin-top: 5px;
+    }
+
+    .card__fuctional {
+        width: 142px;
+        height: 24px;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 4px;
+
+        .card__price {
+            font-family: 'Gotham Pro', sans-serif;
+            font-weight: 500;
+            font-size: 12px;
+            color: rgba(193, 193, 193, 1);
+        }
+    }
+
+    .card__btns {
+        width: 136px;
+        height: 97px;
+        border-radius: 10px;
+        background-color: rgba(255, 255, 255, 1);
+        box-shadow: 0 2px 12px 0 rgba(73, 73, 73, 0.1);
+        position: absolute;
+        margin: 13% 0 0 13%;
+
+        hr {
+            width: 116px;
+            height: 1px;
+            background-color: rgba(247, 246, 249, 1);
+            border: none;
+            margin: 9px auto;
+        }
+
+        button {
+            width: 116px;
+            height: 30px;
+            border: none;
+            display: flex;
+            align-items: center;
+            background-color: transparent;
+            color: rgba(73, 73, 73, 1);
+            font-family: 'Gotham Pro', sans-serif;
+            font-weight: 800;
+            font-size: 17px;
+            margin: 9px auto 0 auto;
+            cursor: pointer;
+
+            img {
+                width: 30px;
+                margin-right: 5px;
+            }
+        }
+        button:hover {
+            background-color: rgb(235, 235, 235);;
+        }
+    }
+}
+
+.card__img {
+    width: 142px;
+    height: 85px;
+    border-radius: 6px;
+}
+

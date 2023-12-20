@@ -1,0 +1,138 @@
+@font-face {
+    font-family: 'Gotham Pro';
+    src: 
+        url('../../assets/fonts/Gotham Pro/gothampro_black.ttf') format('truetype'),
+        url('../../assets/fonts/Gotham Pro/gothampro_blackitalic.ttf') format('truetype'),
+        url('../../assets/fonts/Gotham Pro/gothampro_bold.ttf') format('truetype'),
+        url('../../assets/fonts/Gotham Pro/gothampro_bolditalic.ttf') format('truetype'),
+        url('../../assets/fonts/Gotham Pro/gothampro_italic.ttf') format('truetype'),
+        url('../../assets/fonts/Gotham Pro/gothampro_light.ttf') format('truetype'),
+        url('../../assets/fonts/Gotham Pro/gothampro_lightitalic.ttf') format('truetype'),
+        url('../../assets/fonts/Gotham Pro/gothampro_medium.ttf') format('truetype'),
+        url('../../assets/fonts/Gotham Pro/gothampro_mediumitalic.ttf') format('truetype'),
+        url('../../assets/fonts/Gotham Pro/gothampro.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 1440px;
+    margin: auto;
+}
+
+.register, .password, .login {
+    width: 1440px;
+    height: 1024px;
+    display: flex;
+    font-family: 'Gotham Pro', sans-serif;
+
+    .main__img {
+        width: 720px;
+        height: 1024px;
+    }
+
+    .register__choose_img {
+        width: 44px;
+        height: 44px;
+    }
+
+    .register__form, .login__form {
+        width: 720px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        .register__btns {
+            display: flex;
+            align-items: center;
+            margin-right: 66%;
+        }
+
+        a {
+            color: rgba(0, 0, 0, 1);
+            font-weight: 400;
+            text-decoration-line: none;
+            margin-right: 78%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                margin-right: 10px;
+            }
+        }
+        p {
+            margin-right: 78%;;
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: auto 0 71% 4%;
+
+        .css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+            margin-bottom: 70px;
+        }
+    }
+}
+
+.password__eye_icon {
+    width: 44px;
+    height: 23px;
+    margin-right: -50px;
+}
+
+.register__inp {
+    width: 186px;
+    height: 34px;
+    font-size: 30px;
+    border: none;
+    outline: none;
+    font-family: 'Gotham Pro', sans-serif;
+    font-weight: normal;
+}
+
+.password__form {
+    align-items: center;
+
+    h3 {
+        font-size: 20px;
+        color: rgba(73, 73, 73, 1);
+        margin-right: 50px;
+        margin-bottom: 7px;
+    }
+
+    p {
+        width: 279px;
+        height: 57px;
+        color: rgba(192, 192, 192, 1);
+        text-align: center;
+        font-weight: 400;
+        font-family: none;
+        margin: 0 0 10px 63%;
+        margin-bottom: 30px;
+    }
+
+    button {
+        margin-right: 64px;
+        margin-top: 50px;
+    }
+}
+
+
+.login {
+    .login__eye_icon {
+        position: absolute;
+        margin-left: 309px;
+        margin-bottom: 14px;
+    }
+}
