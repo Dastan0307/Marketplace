@@ -35,6 +35,13 @@
 
     .profile__menu_btns {
         margin-top: 40px;
+
+        button:hover {
+            width: 476px;
+            height: 46px;
+            border-radius: 14px;
+            background-color: rgba(247, 246, 249, 1);
+        }
     }
 
     button {
@@ -164,10 +171,21 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
-        margin: 15px 0 0 132px;
+        align-items: start;
+        margin: 10px 0 0 132px;
+        text-align: start;
+        padding-bottom: 10px;
+        padding-left: 15px;
 
-        button {
+        hr {
+            width: 620px;
+            height: 1px;
+            background-color: rgba(247, 246, 249, 1);
+            border: none;
+            margin: 9px 0;
+        }
+
+        .profile__contact_btn {
             width: 620px;
             height: 32px;
             display: flex;
@@ -179,7 +197,6 @@
             font-family: 'Gotham Pro', sans-serif;
             font-weight: 600;
             font-size: 16px;
-            margin-bottom: 8px;
             margin-top: 8px;
             cursor: pointer;
 
@@ -189,7 +206,7 @@
             }
         }
 
-        p {
+        .profile__contact_p {
             width: 620px;
             height: 32px;
             color: rgba(0, 0, 0, 1);
@@ -319,9 +336,18 @@
             margin-bottom: 35px;
             border: none;
         }
-        button{
+        .profile__checkNumber_btn {
+            width: 215px;
+            height: 22px;
+            border: none;
             margin-left: 77%;
             margin-top: -10px;
+            background-color: transparent;
+            color: rgba(84, 88, 234, 1);
+            font-family: 'Gotham Pro', sans-serif;
+            font-weight: 600;
+            font-size: 17px;
+            margin-right: 76%;
         }
         .profile__timer {
             p {

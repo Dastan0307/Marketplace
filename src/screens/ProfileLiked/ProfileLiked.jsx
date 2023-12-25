@@ -12,6 +12,7 @@ import Card from '../../components/Card/Card';
 const ProfileLiked = () => {
     const navigate = useNavigate();
 
+
   return (
         <div className="container" >
             <div className="profile__menu_list">

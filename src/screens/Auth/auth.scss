@@ -1,17 +1,7 @@
 @font-face {
     font-family: 'Gotham Pro';
-    src: 
-        url('../../assets/fonts/Gotham Pro/gothampro_black.ttf') format('truetype'),
-        url('../../assets/fonts/Gotham Pro/gothampro_blackitalic.ttf') format('truetype'),
-        url('../../assets/fonts/Gotham Pro/gothampro_bold.ttf') format('truetype'),
-        url('../../assets/fonts/Gotham Pro/gothampro_bolditalic.ttf') format('truetype'),
-        url('../../assets/fonts/Gotham Pro/gothampro_italic.ttf') format('truetype'),
-        url('../../assets/fonts/Gotham Pro/gothampro_light.ttf') format('truetype'),
-        url('../../assets/fonts/Gotham Pro/gothampro_lightitalic.ttf') format('truetype'),
-        url('../../assets/fonts/Gotham Pro/gothampro_medium.ttf') format('truetype'),
-        url('../../assets/fonts/Gotham Pro/gothampro_mediumitalic.ttf') format('truetype'),
-        url('../../assets/fonts/Gotham Pro/gothampro.ttf') format('truetype');
-    font-weight: normal;
+    src:
+        url('../../assets/fonts/Gotham Pro/gothampro.ttf') format('truetype');  
     font-style: normal;
   }
 
@@ -53,6 +43,7 @@
             display: flex;
             align-items: center;
             margin-right: 66%;
+            font-weight: 600;
         }
 
         a {
@@ -63,6 +54,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            font-weight: 600;
 
             img {
                 margin-right: 10px;
@@ -104,6 +96,17 @@
 .password__form {
     align-items: center;
 
+    .password__inp {
+        width: 186px;
+        height: 34px;
+        font-size: 30px;
+        border: none;
+        outline: none;
+        font-family: 'Gotham Pro', sans-serif;
+        font-weight: normal;
+        background-color: transparent;
+    }
+
     h3 {
         font-size: 20px;
         color: rgba(73, 73, 73, 1);
@@ -134,5 +137,39 @@
         position: absolute;
         margin-left: 309px;
         margin-bottom: 14px;
+    }
+}
+
+// logout
+.logout {
+    width: 391px;
+    height: 392px;
+    border-radius: 40px;
+    background-color: rgba(255, 255, 255, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    p {
+        width: 303px;
+        height: 44px;
+        font-family: 'Gotham Pro', sans-serif;
+        font-weight: 600;
+        color: rgba(41, 41, 41, 1);
+        font-size: 18px;
+        text-align: center;
+        margin-top: -10px;
+        margin-bottom: -10px;
+    }
+
+    .logout__btn {
+        width: 335px;
+        height: 44px;
+        font-family: 'Gotham Pro', sans-serif;
+        font-weight: 700;
+        color: rgba(73, 73, 73, 1);
+        border: none;
+        margin-top: -25px   ;
     }
 }

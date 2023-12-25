@@ -10,12 +10,14 @@ import productIcon from '../../assets/img/Frame 8512120651.svg';
 import exitIcon from '../../assets/img/Frame 8512120652.svg';
 import backIcon from '../../assets/img/Frame 851211999.svg';
 import phoneIcon from '../../assets/img/Frame 860.svg';
+import Logout from "../../screens/Auth/Logout/Logout";
 import './profile.scss';
 
 const ProfilePage = (props) => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [open, setOpen] = useState(false);
     const [changePhoneNumber, setChangePhoneNumber] = useState(false);
+    const [logout, setLogout] = useState(false);
     const [timer, setTimer] = useState(false);
 
     const navigate = useNavigate();
@@ -32,6 +34,14 @@ const ProfilePage = (props) => {
     };
     const handleOpen = () => {
         setOpen(true);
+    };
+
+    const logoutCardClose = () => {
+        setLogout(false);
+    };
+    const logoutCardOpen = () => {
+        console.log('hello');
+        setLogout(true);
     };
 
     const date = new Date('Thu, 26 Sep 2022 22:01:00');
@@ -75,14 +85,14 @@ const ProfilePage = (props) => {
   return (
     <div className="container" >
         <div className="profile__menu_list">
-            <div className="profile__user_name" onClick={navigate('/profile')}>
+            <div className="profile__user_name" >
                 <img src={profileIcon} alt="Error :(" style={{width: '60px'}} />
                 <p>Алесястар<br /><span>sergeykrash01</span></p>
             </div>
             <div className="profile__menu_btns">
-                <button onClick={navigate('/profile_liked')}><p><img src={heartIcon} alt="Error :(" style={{width: '30'}} />Понравившиеся</p> <ArrowForwardIosIcon /></button>
+                <button onClick={() => navigate('/profile_liked')}><p><img src={heartIcon} alt="Error :(" style={{width: '30'}} />Понравившиеся</p> <ArrowForwardIosIcon /></button>
                 <button><p><img src={productIcon} alt="Error :(" style={{width: '30'}} />Мои товары</p> <ArrowForwardIosIcon /></button>
-                <button><p><img src={exitIcon} alt="Error :(" style={{width: '30'}} />Выйти</p> <ArrowForwardIosIcon /></button>
+                <button onClick={logoutCardOpen}><p><img src={exitIcon} alt="Error :(" style={{width: '30'}} />Выйти</p> <ArrowForwardIosIcon /></button>
             </div>
         </div>
         <div className="profile__user">
@@ -105,7 +115,8 @@ const ProfilePage = (props) => {
                 <button>Дата рождения</button>
             </div>
             <div className="profile__contact_user">
-                <button onClick={handleOpen}>Добавить номер<span>0(000) 000 000</span></button>
+                <button className="profile__contact_btn" onClick={handleOpen}>Добавить номер<span>0(000) 000 000</span></button>
+                <hr />
                 <p>nikitina.alesya@gmail.</p>
                 <Backdrop
                     sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
@@ -116,7 +127,7 @@ const ProfilePage = (props) => {
                         <h3>Изменить номер телефона</h3>
                         <img src={phoneIcon} alt="Error :(" style={{width:'80px', marginBottom: '40px'}} />
                         <h4>Введите номер телефона</h4>
-                        <p>Мы отправим вам СМС с кодом подтверждения</p>
+                        <p className="profile__contact_p">Мы отправим вам СМС с кодом подтверждения</p>
                         <input type="text" placeholder="0(000) 000 000" onChange={(e) => setPhoneNumber(e.target.value)} />
                         <strong>0(000) 000 000</strong>
                         {
@@ -140,7 +151,7 @@ const ProfilePage = (props) => {
                         <input type="text" placeholder="0 0 0 0" />
                        {
                         timer ? 
-                        <button>Отправить код еще раз</button>
+                        <button className="profile__checkNumber_btn">Отправить код еще раз</button>
                         :
                         <div className="profile__timer">
                             <p style={{marginLeft: '38%', marginBottom: '-24px'}}>Повторный запрос</p>
@@ -153,6 +164,13 @@ const ProfilePage = (props) => {
                         </div> 
                        }
                     </div>
+                </Backdrop> 
+                {/* exit  */}
+                <Backdrop
+                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    open={logout}
+                >
+                 <Logout logoutCardClose={logoutCardClose} />
                 </Backdrop> 
             </div>
         </div>
