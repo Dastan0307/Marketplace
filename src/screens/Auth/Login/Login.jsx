@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import { useDispatch } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import { loginUserAsync } from '../../../store/slices/auth/auth';
 import PrimaryButton from "../../../components/Button/Button";
 import authImg from '../../../assets/img/Photo background.png';
@@ -10,18 +11,28 @@ import '../auth.scss';
 
 const Login = () => {
     const dispatch = useDispatch();
-    const notify = () => toast.success("Успешное уведомление!");
+    const navigate = useNavigate()
+    const notify = () => toast.success("Успешное уведомление!", {
+        autoClose: 2000, 
+        position: toast.POSITION.TOP_RIGHT,
+        hideProgressBar: false,
+        closeOnClick: true,
+        rtl: false,
+        pauseOnFocusLoss: true,
+        draggable: true,
+        pauseOnHover: true
+      });
   
     const [username, setUserName] = useState('');
     const [password, setPassword] = useState('');
 
     const handleLogin = () => {
         dispatch(loginUserAsync({ username, password, notify }))
+        navigate('/profile')
     };
 
   return (
     <div className="container">
-        {/* <ToastContainer style={{position: 'absolute'}}/> */}
         <div className="login">
             <img src={authImg} alt="Error :(" className="main__img" />
             <div className="login__form">

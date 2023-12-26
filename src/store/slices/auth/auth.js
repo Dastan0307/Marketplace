@@ -8,16 +8,11 @@ const initialState = {
   username: '',
   email: '',
   password: '',
-  password_check: ''
+  password_check: '',
+  tokens: []
 }
 
-const showToastMessage = () => {
-  toast.success("Success Notification !", {
-    position: toast.POSITION.TOP_RIGHT,
-  });
-}
-
-export const registerUserAsync = createAsyncThunk('auth/registerUserAsync', async (authData, { dispatch }) => {
+export const registerUserAsync = createAsyncThunk('auth/registerUserAsync', async (authData) => {
   try {
     const response = await axios.post(`${API}/register/`, authData);
     console.log(authData);
@@ -31,7 +26,8 @@ export const loginUserAsync = createAsyncThunk('auth/loginUserAsync', async (aut
   try {
     const { username, password, notify } = authData;
     const response = await axios.post(`${API}/login/`, { username, password });
-    toast.success('вы вошли как: ' + response.data?.first_name)
+    notify()
+    console.log('hello');
     return response.data;
   } catch (error) {
     throw error; 
@@ -50,11 +46,14 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
     .addCase(registerUserAsync.fulfilled, (state, action) => {
-      console.log('Успешная регистрация:', action.payload);
+      state.username = action.payload;
+      state.email = action.payload;
+      state.password = action.payload;
+      state.password_check = action.payload;
     })
     .addCase(loginUserAsync.fulfilled, (state, action) => {
-      // showToastMessage()
-      console.log('Успешная регистрация:', action.payload);
+      state.tokens.push(action.payload);
+      toast.success('Hello');
     }) }
 })
 

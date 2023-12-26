@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Backdrop from '@mui/material/Backdrop';
 import ClearIcon from '@mui/icons-material/Clear';
-import spinnerIcon from '../../assets/img/Frame 861.svg';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useSelector } from "react-redux";
+import spinnerIcon from '../../assets/img/Frame 861.svg';
 import profileIcon from '../../assets/img/Frame 851212073.svg';
 import heartIcon from '../../assets/img/Frame 851212065.svg';
 import productIcon from '../../assets/img/Frame 8512120651.svg';
@@ -19,6 +20,8 @@ const ProfilePage = (props) => {
     const [changePhoneNumber, setChangePhoneNumber] = useState(false);
     const [logout, setLogout] = useState(false);
     const [timer, setTimer] = useState(false);
+
+    const data = useSelector((state) => state.auth );
 
     const navigate = useNavigate();
 

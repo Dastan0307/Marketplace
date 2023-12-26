@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import { registerUserAsync } from '../../../store/slices/auth/auth';
 import PrimaryButton from "../../../components/Button/Button";
 import authImg from '../../../assets/img/Photo background.png';
@@ -10,6 +11,7 @@ import '../auth.scss';
 
 const Password = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [password, setPassword] = useState('');
     const [password_check, setPasswordCheck] = useState('');
@@ -18,6 +20,7 @@ const Password = () => {
         const username = localStorage.getItem('username');
         const email = localStorage.getItem('email');
         dispatch(registerUserAsync({ username, email, password, password_check }));
+        navigate('/login');
     };
 
   return (
