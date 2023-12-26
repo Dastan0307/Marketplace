@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import Backdrop from '@mui/material/Backdrop';
 import ClearIcon from '@mui/icons-material/Clear';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { useSelector } from "react-redux";
 import spinnerIcon from '../../assets/img/Frame 861.svg';
 import profileIcon from '../../assets/img/Frame 851212073.svg';
 import heartIcon from '../../assets/img/Frame 851212065.svg';
@@ -21,7 +20,8 @@ const ProfilePage = (props) => {
     const [logout, setLogout] = useState(false);
     const [timer, setTimer] = useState(false);
 
-    const data = useSelector((state) => state.auth );
+    const username = localStorage.getItem('username');
+    const email = localStorage.getItem('email');
 
     const navigate = useNavigate();
 
@@ -90,7 +90,7 @@ const ProfilePage = (props) => {
         <div className="profile__menu_list">
             <div className="profile__user_name" >
                 <img src={profileIcon} alt="Error :(" style={{width: '60px'}} />
-                <p>Алесястар<br /><span>sergeykrash01</span></p>
+                <p>{username ? username : ''}<br /><span>{email ? email : ''}</span></p>
             </div>
             <div className="profile__menu_btns">
                 <button onClick={() => navigate('/profile_liked')}><p><img src={heartIcon} alt="Error :(" style={{width: '30'}} />Понравившиеся</p> <ArrowForwardIosIcon /></button>
@@ -113,14 +113,14 @@ const ProfilePage = (props) => {
                 <hr />
                 <button>Фамилия</button>
                 <hr />
-                <h3>Алесястар</h3>
+                <h3>{username ? username : ''}</h3>
                 <hr />
                 <button>Дата рождения</button>
             </div>
             <div className="profile__contact_user">
                 <button className="profile__contact_btn" onClick={handleOpen}>Добавить номер<span>0(000) 000 000</span></button>
                 <hr />
-                <p>nikitina.alesya@gmail.</p>
+                <p>{email ? email : ''}</p>
                 <Backdrop
                     sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                     open={open}
