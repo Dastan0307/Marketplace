@@ -11,6 +11,7 @@ import exitIcon from '../../assets/img/Frame 8512120652.svg';
 import backIcon from '../../assets/img/Frame 851211999.svg';
 import phoneIcon from '../../assets/img/Frame 860.svg';
 import Logout from "../../screens/Auth/Logout/Logout";
+import { checkAuth } from '../../store/slices/auth/auth';
 import './profile.scss';
 
 const ProfilePage = (props) => {
@@ -83,6 +84,12 @@ const ProfilePage = (props) => {
         const timerID = setInterval(() => tick(), 1000);
         return () => clearInterval(timerID);
     })
+
+    useEffect(() => {
+        if(localStorage.getItem('token')) {
+            checkAuth();
+        };
+      }, []);
 
 
   return (
