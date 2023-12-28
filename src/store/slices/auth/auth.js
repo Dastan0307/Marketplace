@@ -9,6 +9,7 @@ const initialState = {
   email: '',
   password: '',
   password_check: '',
+  phone_number: '',
   tokens: []
 }
 
@@ -20,6 +21,7 @@ export const registerUserAsync = createAsyncThunk('auth/registerUserAsync', asyn
     localStorage.setItem('password_check', password_check)
     return response.data;
   } catch (error) {
+    localStorage.clear();
     throw error; 
   }
 });
@@ -50,6 +52,31 @@ export const checkAuth = createAsyncThunk('auth/checkAuth', async () => {
   };
 });
 
+export const addNumberUser = createAsyncThunk('auth/addNumberUser', async (phone_number) => {
+  let token = JSON.parse(localStorage.getItem('token'));
+  try {
+    const Authorization = `Bearer ${token.access}`;
+    const response = await axios.post(`${API}/add_phone_number/`, 
+    { phone_number }, 
+    { headers: { Authorization } });
+    console.log('Succes');
+    localStorage.setItem('phone_number', phone_number);
+    return response.data;
+  } catch (error) {
+    throw error; 
+  }
+});
+
+export const sendCode = createAsyncThunk('auth/senCode', async (code_activation) => {
+  try {
+    console.log(code_activation);
+    const response = await axios.post(`${API}/activate_phone_number/`, { code_activation });
+    return response.data;
+  } catch (error) {
+    throw error; 
+  }
+});
+
 
 const authSlice = createSlice({
   name: 'auth',
@@ -67,6 +94,7 @@ const authSlice = createSlice({
       state.email = action.payload;
       state.password = action.payload;
       state.password_check = action.payload;
+      state.phone_number = action.payload;
     })
     .addCase(loginUserAsync.fulfilled, (state, action) => {
       state.tokens.push(action.payload);

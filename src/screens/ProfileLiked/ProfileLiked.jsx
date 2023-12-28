@@ -16,7 +16,7 @@ const ProfileLiked = () => {
   return (
         <div className="container" >
             <div className="profile__menu_list">
-                <div className="profile__user_name" onClick={navigate('/profile')}>
+                <div className="profile__user_name" onClick={() => navigate('/profile')}>
                     <img src={profileIcon} alt="Error :(" style={{width: '60px'}} />
                     <p>Алесястар<br /><span>sergeykrash01</span></p>
                 </div>

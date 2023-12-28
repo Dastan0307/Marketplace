@@ -204,3 +204,67 @@
         margin-top: -25px   ;
     }
 }
+
+// About card 
+.about__card {
+    width: 532px;
+    height: 242px;
+    margin: 20px auto;
+
+    .about__card_price {
+        font-family: 'Gotham Pro', sans-serif;
+        font-weight: 900;
+        color: rgba(84, 88, 234, 1);
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .card__like {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+
+        .card__like_icon {
+            width: 24px;
+            height: 24px;
+            color: red;
+            margin-right: 6px;
+        }
+
+        p {
+            font-family: 'Gotham Pro', sans-serif;
+            font-weight: 400;
+            font-size: 12px;
+            color: rgba(192, 192, 192, 1);
+        }
+    }
+
+    .about__card_title {
+        font-family: 'Gotham Pro', sans-serif;
+        font-weight: 900;
+        font-size: 18px;
+        color: rgba(73, 73, 73, 1);
+        margin-bottom: 15px;
+    }
+
+    .about__title_p {
+        width: 532px;
+        height: 38px;
+        font-family: 'Gotham Pro', sans-serif;
+        font-weight: 400;
+        color: rgba(192, 192, 192, 1);
+        margin-bottom: 20px;
+    }
+
+    .card__about_description {
+        font-family: 'Gotham Pro', sans-serif;
+        font-weight: 500;
+        color: rgba(73, 73, 73, 1);
+        margin-bottom: 15px;
+    }
+    .card__description_p {
+        font-family: 'Gotham Pro', sans-serif;
+        font-weight: 400;
+        color: rgba(192, 192, 192, 1);
+    }
+}

@@ -1,0 +1,45 @@
+@font-face {
+    font-family: 'Gotham Pro';
+    src:
+        url('../../assets/fonts/Gotham Pro/gothampro.ttf') format('truetype');  
+    font-style: normal;
+  }
+
+.header {
+    width: 1356px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 40px;
+
+    button {
+        width: 215px;
+    }
+
+    .header__btn {
+        width: 475px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+
+        .header__user {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: end;
+
+            p {
+                font-family: 'Gotham Pro', sans-serif;
+                font-weight: 600;
+                margin-right: 10px;
+
+                span {
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}

@@ -88,6 +88,8 @@
         font-weight: 700;
         font-size: 18px;
         color: rgba(73, 73, 73, 1);
+        cursor: pointer;
+
         button {
             display: flex;
             justify-content: center;
@@ -98,6 +100,7 @@
             font-size: 18px;
             color: rgba(73, 73, 73, 1);
             background-color: transparent;
+            cursor: pointer;
 
             img {
                 margin-right: 10px;
@@ -234,9 +237,9 @@
         justify-content: center;
         align-items: center;
 
-        h3 {
+        .profile__title {
             font-family: 'Gotham Pro', sans-serif;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 24px;
             color: rgba(73, 73, 73, 1);
             margin-bottom: 40px;
@@ -244,15 +247,15 @@
 
         h4 {
             font-family: 'Gotham Pro', sans-serif;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 20px;
             color: rgba(73, 73, 73, 1); 
         }
-        p {
+        .profile__contact_p {
             width: 335px;
             height: 38px;
             font-family: 'Gotham Pro', sans-serif;
-            font-weight: 400;
+            font-weight: 300;
             font-size: 16px;
             color: rgba(192, 192, 192, 1);
             text-align: center;
@@ -289,6 +292,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            border: none;
         }
     }
     .profile__check_number {
@@ -348,6 +352,7 @@
             font-weight: 600;
             font-size: 17px;
             margin-right: 76%;
+            cursor: pointer;
         }
         .profile__timer {
             p {
@@ -355,6 +360,7 @@
                 font-weight: 400;
                 font-size: 16px;
                 color: rgba(192, 192, 192, 1);
+                margin-bottom: 20px;
             }
         } 
     }

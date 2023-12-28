@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
 import Backdrop from '@mui/material/Backdrop';
 import ClearIcon from '@mui/icons-material/Clear';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -11,15 +12,18 @@ import exitIcon from '../../assets/img/Frame 8512120652.svg';
 import backIcon from '../../assets/img/Frame 851211999.svg';
 import phoneIcon from '../../assets/img/Frame 860.svg';
 import Logout from "../../screens/Auth/Logout/Logout";
-import { checkAuth } from '../../store/slices/auth/auth';
+import { checkAuth, addNumberUser, sendCode } from '../../store/slices/auth/auth';
 import './profile.scss';
 
 const ProfilePage = (props) => {
-    const [phoneNumber, setPhoneNumber] = useState('');
+    const [phone_number, setPhoneNumber] = useState('');
+    const [code_activation, setCodeActivation] = useState('');
     const [open, setOpen] = useState(false);
     const [changePhoneNumber, setChangePhoneNumber] = useState(false);
     const [logout, setLogout] = useState(false);
     const [timer, setTimer] = useState(false);
+
+    const dispatch = useDispatch();
 
     const username = localStorage.getItem('username');
     const email = localStorage.getItem('email');
@@ -68,18 +72,6 @@ const ProfilePage = (props) => {
         }
     }
 
-    function closeTimer() {
-        setTimeout(() => {
-            setTimer(true)
-        }, 60000);
-    };
-
-    function checkPhoneNumber() {
-        changePhoneNumberOpen()
-        handleClose()
-        closeTimer()
-    }
-
     useEffect(()=>{
         const timerID = setInterval(() => tick(), 1000);
         return () => clearInterval(timerID);
@@ -90,6 +82,38 @@ const ProfilePage = (props) => {
             checkAuth();
         };
       }, []);
+
+    function closeTimer() {
+        setTimeout(() => {
+            setTimer(true)
+        }, 60000);
+    };
+
+
+    function handleNumber() {
+        dispatch(addNumberUser({ phone_number }))
+    }
+
+    
+    function againSendCode() {
+        dispatch(addNumberUser({ phone_number }))
+    };
+
+    const handleEnterKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            dispatch(sendCode({ code_activation }))
+            setCodeActivation('')
+        }
+    }
+
+
+      
+    function checkPhoneNumber() {
+        changePhoneNumberOpen()
+        handleClose()
+        closeTimer()
+        handleNumber()
+    };
 
 
   return (
@@ -107,12 +131,11 @@ const ProfilePage = (props) => {
         </div>
         <div className="profile__user">
             <div className="back__btn">
-                <button><img src={backIcon} alt="Error :(" />Назад</button>
+                <button onClick={() => navigate('/')} ><img src={backIcon} alt="Error :(" />Назад</button>
                 <p>Профиль</p>
             </div>
             <div className="profile__img">
                 <img src={profileIcon} alt="Error:(" style={{width: '80px'}} />
-                {/* <input type="file" placeholder="Выбрать фотографию"/> */}
                 <button>Выбрать фотографию</button>
             </div>
             <div className="profile__user_name">
@@ -134,14 +157,14 @@ const ProfilePage = (props) => {
                 >
                     <ClearIcon className="profile__clear_icon" onClick={handleClose} />
                     <div className="profile__edit_number">
-                        <h3>Изменить номер телефона</h3>
+                        <h3 className="profile__title">Изменить номер телефона</h3>
                         <img src={phoneIcon} alt="Error :(" style={{width:'80px', marginBottom: '40px'}} />
                         <h4>Введите номер телефона</h4>
                         <p className="profile__contact_p">Мы отправим вам СМС с кодом подтверждения</p>
                         <input type="text" placeholder="0(000) 000 000" onChange={(e) => setPhoneNumber(e.target.value)} />
                         <strong>0(000) 000 000</strong>
                         {
-                            phoneNumber.length === 10 ? 
+                            phone_number.length === 10 ? 
                             <button onClick={checkPhoneNumber} style={{background: 'rgba(84, 88, 234, 1)'}} 
                             >Далее</button> : 
                             <button style={{background: 'rgba(247, 247, 248, 1)'}}>Далее</button>
@@ -158,13 +181,18 @@ const ProfilePage = (props) => {
                         <h3>Изменить номер телефона</h3>
                         <img src={phoneIcon} alt="Error :(" style={{width:'80px', marginBottom: '40px'}} />
                         <h4>Введите код из СМС</h4>
-                        <input type="text" placeholder="0 0 0 0" />
+                        <input 
+                            type="text" 
+                            placeholder="0 0 0 0" 
+                            value={code_activation}
+                            onKeyDown={handleEnterKeyPress}
+                            onChange={(e) => setCodeActivation(e.target.value)} />
                        {
                         timer ? 
-                        <button className="profile__checkNumber_btn">Отправить код еще раз</button>
+                        <button className="profile__checkNumber_btn" onClick={() => againSendCode()}>Отправить код еще раз</button>
                         :
                         <div className="profile__timer">
-                            <p style={{marginLeft: '38%', marginBottom: '-24px'}}>Повторный запрос</p>
+                            <p style={{ width: '156px', marginLeft: '2%', marginBottom: '0' }}>Повторный запрос</p>
                             <p style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                             <img src={spinnerIcon} alt="Error" style={{width: '16px', color: 'rgba(192, 192, 192, 1)', marginRight: '5px'}} />
                                 {`${m
