@@ -15,10 +15,13 @@ const initialState = {
 
 export const registerUserAsync = createAsyncThunk('auth/registerUserAsync', async (authData) => {
   try {
-    const { password, password_check } = authData;
+    const { password, navigate, showToastMessage } = authData;
     const response = await axios.post(`${API}/register/`, authData);
     localStorage.setItem('password', password)
-    localStorage.setItem('password_check', password_check)
+    showToastMessage();
+    setTimeout(() => {
+      navigate('/login')
+    }, 4000);
     return response.data;
   } catch (error) {
     localStorage.clear();
@@ -28,10 +31,12 @@ export const registerUserAsync = createAsyncThunk('auth/registerUserAsync', asyn
 
 export const loginUserAsync = createAsyncThunk('auth/loginUserAsync', async (authData) => {
   try {
-    const { username, password, notify } = authData;
+    const { username, password, showToastMessage, navigate } = authData;
     const response = await axios.post(`${API}/login/`, { username, password });
-    notify()
-    console.log(response.data);
+    showToastMessage();
+    setTimeout(() => {
+      navigate('/profile')
+    }, 4000);
     localStorage.setItem('token', JSON.stringify(response.data));
     return response.data;
   } catch (error) {
@@ -59,7 +64,6 @@ export const addNumberUser = createAsyncThunk('auth/addNumberUser', async (phone
     const response = await axios.post(`${API}/add_phone_number/`, 
     { phone_number }, 
     { headers: { Authorization } });
-    console.log('Succes');
     localStorage.setItem('phone_number', phone_number);
     return response.data;
   } catch (error) {
@@ -96,9 +100,14 @@ const authSlice = createSlice({
       state.password_check = action.payload;
       state.phone_number = action.payload;
     })
+    .addCase(registerUserAsync.rejected, (state, action) => {
+      toast.error('Данный пользователь уже зарегистрирован');
+    })
     .addCase(loginUserAsync.fulfilled, (state, action) => {
       state.tokens.push(action.payload);
-      toast.success('Hello');
+    })
+    .addCase(loginUserAsync.rejected, (state, action) => {
+      toast.error('Неверный логин или пароль');
     }) }
 })
 

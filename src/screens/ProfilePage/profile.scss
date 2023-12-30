@@ -123,6 +123,7 @@
             font-size: 16px;
             border: none;
             margin-top: 13px;
+            cursor: pointer;
         }
     }
 
@@ -136,7 +137,8 @@
         justify-content: center;
         align-items: center;
         margin: 50px 0 0 132px;
-        button {
+        padding-top: 10px;
+        p {
             width: 620px;
             height: 32px;
             border: none;
@@ -148,13 +150,12 @@
             text-align: start;
             cursor: pointer;
         }
-        h3 {
+        .profile__active_text {
             font-size: 17px;
             font-weight: 600;
             font-family: 'Gotham Pro', sans-serif;
             background-color: transparent;
             color: rgba(0, 0, 0, 1);
-            margin-right: 80%;
             cursor: pointer;
         }
         hr {
@@ -162,8 +163,21 @@
             height: 1px;
             background-color: rgba(247, 246, 249, 1);
             border: none;
-            margin: 8px 0;
+            margin-bottom: 10px;
         }
+    }
+
+    .profile__btn_update {
+        font-family: 'Gotham Pro', sans-serif;
+        color: rgba(84, 88, 234, 1);
+        background-color: transparent;
+        font-weight: 600;
+        font-size: 16px;
+        border: none;
+        margin-top: 9px;
+        margin-left: 69%;
+        margin-bottom: 10px;
+        cursor: pointer;
     }
 
     .profile__contact_user {
@@ -269,6 +283,7 @@
             text-align: center;
             margin-bottom: 35px;
             border: none;
+            outline: none;
         }
 
         input:focus {
@@ -329,6 +344,7 @@
             margin-bottom: 35px;
             border: none;
             margin-top: 30px;
+            outline: none;
         }
 
         input:focus {
@@ -369,5 +385,56 @@
         margin: 0 0 21% 30%;
         position: absolute;
         cursor: pointer;
+    }
+}
+
+.profile__update_icon {
+    color: black;
+    margin: 0 0 24% 30%;
+    position: absolute;
+    cursor: pointer;
+}
+
+.profile__update {
+    width: 563px;
+    height: 450px;
+    border-radius: 30px;
+    background-color: rgba(255, 255, 255, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h3 {
+        font-family: 'Gotham Pro', sans-serif;
+        font-weight: 700;
+        font-size: 24px;
+        text-align: center;
+        color: rgba(73, 73, 73, 1);
+        margin-bottom: 30px;
+    }
+
+    input {
+        width: 400px;
+        height: 50px;
+        border-radius: 12px;
+        background-color: rgba(247, 246, 249, 1);
+        border: none;
+        font-family: 'Gotham Pro', sans-serif;
+        font-weight: 500;
+        font-size: 16px;
+        color: rgba(73, 73, 73, 1);
+        padding-left: 20px;
+        margin: 10px 0;
+    }
+
+    ::-webkit-input-placeholder {
+        color: rgba(192, 192, 192, 1);
+        font-family: 'Gotham Pro', sans-serif;
+        font-weight: 400;;
+    }
+
+    button {
+        margin-top: 50px;
     }
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import LogoutImg from '../../../assets/img/logout 01.svg';
-import PrimaryButton from '../../../components/Button/Button';
+import { PrimaryButton } from '../../../components/Button/Button';
 import { Button } from 'antd';
 import '../auth.scss';
 

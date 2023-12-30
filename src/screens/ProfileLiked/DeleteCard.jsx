@@ -1,6 +1,6 @@
 // import React, { useState, useEffect } from "react";
 import deleteImg from '../../assets/img/trash.svg'
-import PrimaryButton from '../../components/Button/Button';
+import { PrimaryButton } from '../../components/Button/Button';
 import { Button } from 'antd';
 import './profile_liked.scss';
 

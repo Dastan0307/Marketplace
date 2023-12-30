@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import Backdrop from '@mui/material/Backdrop';
 import ClearIcon from '@mui/icons-material/Clear';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import spinnerIcon from '../../assets/img/Frame 861.svg';
 import profileIcon from '../../assets/img/Frame 851212073.svg';
 import heartIcon from '../../assets/img/Frame 851212065.svg';
 import productIcon from '../../assets/img/Frame 8512120651.svg';
@@ -12,21 +11,45 @@ import exitIcon from '../../assets/img/Frame 8512120652.svg';
 import backIcon from '../../assets/img/Frame 851211999.svg';
 import phoneIcon from '../../assets/img/Frame 860.svg';
 import Logout from "../../screens/Auth/Logout/Logout";
-import { checkAuth, addNumberUser, sendCode } from '../../store/slices/auth/auth';
+import { checkAuth, addNumberUser } from '../../store/slices/auth/authSlice';
 import './profile.scss';
+import Timer from "./Timer";
+import UpdateProfile from "./UpdateProfile";
 
 const ProfilePage = (props) => {
     const [phone_number, setPhoneNumber] = useState('');
-    const [code_activation, setCodeActivation] = useState('');
     const [open, setOpen] = useState(false);
+    const [updateProfile, setUpdateProfile] = useState(false);
     const [changePhoneNumber, setChangePhoneNumber] = useState(false);
     const [logout, setLogout] = useState(false);
-    const [timer, setTimer] = useState(false);
+    const [photos, setPhotos] = useState('');
+    const [files, setFiles] = useState([])
 
     const dispatch = useDispatch();
+    const inpRef = useRef();
+    const formData = new FormData();
+
+    const handleChange = () => {
+      const selectedPhoto = inpRef.current.files[0];
+      if (selectedPhoto) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          setPhotos(e.target.result);
+        };
+        reader.readAsDataURL(selectedPhoto);
+          setFiles(inpRef.current.files)
+          formData.append(`files`, files);
+        }};
+
+    localStorage.setItem('user_photo', photos);
+    const userImg = localStorage.getItem('user_photo');
 
     const username = localStorage.getItem('username');
     const email = localStorage.getItem('email');
+    const user_number = localStorage.getItem('phone_number');
+    const name = localStorage.getItem('name');
+    const last_name = localStorage.getItem('last_name');
+    const birth_date = localStorage.getItem('birth_date');
 
     const navigate = useNavigate();
 
@@ -48,34 +71,15 @@ const ProfilePage = (props) => {
         setLogout(false);
     };
     const logoutCardOpen = () => {
-        console.log('hello');
         setLogout(true);
     };
 
-    const date = new Date('Thu, 26 Sep 2022 22:01:00');
-    
-    const min = date.getMinutes();
-    const sec = date.getSeconds();
-    const [over, setOver] = useState(false);
-    const [[ m, s], setTime] = useState([ min, sec]);
-    
-    const tick =()=>{
-        if(over) return;
-        if ( m === 0 && s === 0) {
-            setOver(true);
-        } else if (m === 0 && s === 0) {
-            setTime([ 59, 59]);
-        } else if (s === 0) {
-            setTime([ m - 1, 59]);
-        } else {
-            setTime([ m, s - 1]);
-        }
-    }
-
-    useEffect(()=>{
-        const timerID = setInterval(() => tick(), 1000);
-        return () => clearInterval(timerID);
-    })
+    const updateProfileClose = () => {
+        setUpdateProfile(false);
+    };
+    const updateProfileOpen = () => {
+        setUpdateProfile(true);
+    };
 
     useEffect(() => {
         if(localStorage.getItem('token')) {
@@ -83,35 +87,14 @@ const ProfilePage = (props) => {
         };
       }, []);
 
-    function closeTimer() {
-        setTimeout(() => {
-            setTimer(true)
-        }, 60000);
-    };
-
 
     function handleNumber() {
         dispatch(addNumberUser({ phone_number }))
     }
-
-    
-    function againSendCode() {
-        dispatch(addNumberUser({ phone_number }))
-    };
-
-    const handleEnterKeyPress = (event) => {
-        if (event.key === 'Enter') {
-            dispatch(sendCode({ code_activation }))
-            setCodeActivation('')
-        }
-    }
-
-
-      
+  
     function checkPhoneNumber() {
         changePhoneNumberOpen()
         handleClose()
-        closeTimer()
         handleNumber()
     };
 
@@ -135,22 +118,44 @@ const ProfilePage = (props) => {
                 <p>Профиль</p>
             </div>
             <div className="profile__img">
-                <img src={profileIcon} alt="Error:(" style={{width: '80px'}} />
-                <button>Выбрать фотографию</button>
+                <input onChange={handleChange} ref={inpRef} type="file" style={{display: 'none'}} />
+                {
+                    userImg ? 
+                    <>
+                        <img src={userImg} alt="Error:(" style={{width: '80px', borderRadius: '100px'}} />
+                        <button onClick={()=>{inpRef.current.click()}}>Изменить фото</button> 
+                    </>
+                    :
+                    <>
+                        <img src={profileIcon} alt="Error:(" style={{width: '80px'}} />
+                        <button onClick={()=>{inpRef.current.click()}}>Выбрать фотографию</button>
+                    </>
+                }
             </div>
             <div className="profile__user_name">
-                <button>Имя</button>
+                {name ? <p className="profile__active_text">{ name }</p> : <p>Имя</p>}
                 <hr />
-                <button>Фамилия</button>
+                {last_name ? <p className="profile__active_text">{ last_name }</p> : <p>Фамилия</p>}
                 <hr />
-                <h3>{username ? username : ''}</h3>
+                <p className="profile__active_text">{username ? username : ''}</p>
                 <hr />
-                <button>Дата рождения</button>
+                {birth_date ? <p className="profile__active_text">{ birth_date }</p> : <p>Дата рождения</p>}
             </div>
+                <button className="profile__btn_update" onClick={updateProfileOpen} >Изменить профиль</button>
             <div className="profile__contact_user">
                 <button className="profile__contact_btn" onClick={handleOpen}>Добавить номер<span>0(000) 000 000</span></button>
                 <hr />
                 <p>{email ? email : ''}</p>
+                {/* update profile  */}
+                <Backdrop
+                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    open={updateProfile}
+                >
+                    <ClearIcon className="profile__update_icon" onClick={updateProfileClose} />
+                    <UpdateProfile />
+                </Backdrop> 
+                
+                {/* add number  */}
                 <Backdrop
                     sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                     open={open}
@@ -162,7 +167,11 @@ const ProfilePage = (props) => {
                         <h4>Введите номер телефона</h4>
                         <p className="profile__contact_p">Мы отправим вам СМС с кодом подтверждения</p>
                         <input type="text" placeholder="0(000) 000 000" onChange={(e) => setPhoneNumber(e.target.value)} />
-                        <strong>0(000) 000 000</strong>
+                        {
+                            user_number  ? 
+                                <strong style={{ color: 'red' }}>{user_number}</strong> : 
+                                <strong>0(000) 000 000</strong>
+                        }
                         {
                             phone_number.length === 10 ? 
                             <button onClick={checkPhoneNumber} style={{background: 'rgba(84, 88, 234, 1)'}} 
@@ -172,38 +181,16 @@ const ProfilePage = (props) => {
                     </div>
                 </Backdrop>
                 {/* Message for confirmation */}
+
                 <Backdrop
                     sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                     open={changePhoneNumber}
                 >
                     <ClearIcon className="profile__icon_checkNumber" onClick={changePhoneNumberClose} />
-                    <div className="profile__check_number">
-                        <h3>Изменить номер телефона</h3>
-                        <img src={phoneIcon} alt="Error :(" style={{width:'80px', marginBottom: '40px'}} />
-                        <h4>Введите код из СМС</h4>
-                        <input 
-                            type="text" 
-                            placeholder="0 0 0 0" 
-                            value={code_activation}
-                            onKeyDown={handleEnterKeyPress}
-                            onChange={(e) => setCodeActivation(e.target.value)} />
-                       {
-                        timer ? 
-                        <button className="profile__checkNumber_btn" onClick={() => againSendCode()}>Отправить код еще раз</button>
-                        :
-                        <div className="profile__timer">
-                            <p style={{ width: '156px', marginLeft: '2%', marginBottom: '0' }}>Повторный запрос</p>
-                            <p style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                            <img src={spinnerIcon} alt="Error" style={{width: '16px', color: 'rgba(192, 192, 192, 1)', marginRight: '5px'}} />
-                                {`${m
-                                .toString()
-                                .padStart(2, '0')}:${s.toString().padStart(2, '0')}`}
-                            </p>
-                        </div> 
-                       }
-                    </div>
+                    <Timer phone_number={phone_number} />
                 </Backdrop> 
                 {/* exit  */}
+
                 <Backdrop
                     sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                     open={logout}

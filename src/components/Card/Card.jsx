@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Typography } from 'antd';
 import Backdrop from '@mui/material/Backdrop';
 import { HeartOutlined } from '@ant-design/icons';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import hugeIcon from '../../assets/img/more-vertical.svg';
 import editIcon from '../../assets/img/Frame 851212066.svg'
 import deleteIcon from '../../assets/img/Frame 8512120661.svg'
@@ -69,7 +70,9 @@ const ProductCard = ({ handleClickOpen }) => {
             <div className="card__fuctional">
                 <div style={{display: 'flex', justifyContent: 'center', marginTop: '5px'}}>
                   {
-                    like ? <HeartOutlined style={{width: '24px', cursor: 'pointer'}}/> : <HeartOutlined style={{width: '24px', color: 'red', cursor: 'pointer'}}/>
+                    like ? 
+                    <FavoriteIcon style={{width: '20px', cursor: 'pointer', color: 'red', marginRight: '5px'}} onClick={() => setLike(false)}/> : 
+                    <HeartOutlined style={{width: '24px', cursor: 'pointer' }} onClick={() => setLike(true)}/>
                   }
                   <Paragraph className="card__price">100</Paragraph>
                   </div>

@@ -19,9 +19,9 @@ const Main = () => {
     };
   return (
     <div className="main">
-        <Header />
+        <Header handleClickOpen={handleClickOpen} />
         <div className="main__card">
-            <Card handleClickOpen={handleClickOpen} />
+            <Card />
             <Card />
             <Card />
             <Card />

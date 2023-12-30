@@ -39,6 +39,7 @@
         justify-content: center;
         align-items: center;
         margin-top: 10px;
+
         .register__btns {
             display: flex;
             align-items: center;
@@ -78,9 +79,20 @@
 }
 
 .password__eye_icon {
-    width: 44px;
-    height: 23px;
     margin-right: -50px;
+    border-radius: 50px;
+    background-color: rgba(192, 192, 192, 0.2);
+    border: none;
+    cursor: pointer;
+}
+
+.password__eye_blue {
+    margin-right: -50px;
+    border-radius: 50px;
+    background-color: rgba(192, 192, 192, 0.2);
+    border: none;
+    color: rgba(84, 88, 234, 1);
+    cursor: pointer;
 }
 
 .register__inp {
@@ -105,8 +117,19 @@
         font-family: 'Gotham Pro', sans-serif;
         font-weight: normal;
         background-color: transparent;
+        outline: none;
+        margin-left: 25px;
     }
 
+    .password__error_password {
+        text-align: center;
+        font-size: 15px;
+        color: rgba(243, 69, 69, 1);
+        margin-top: 0;
+        margin-bottom: 0;
+        font-family: 'Gotham Pro', sans-serif;
+        font-weight: 500;
+    }
     h3 {
         font-size: 20px;
         color: rgba(73, 73, 73, 1);
@@ -127,7 +150,6 @@
 
     button {
         margin-right: 64px;
-        margin-top: 50px;
     }
 }
 
@@ -135,8 +157,18 @@
 .login {
     .login__eye_icon {
         position: absolute;
-        margin-left: 309px;
-        margin-bottom: 14px;
+        margin-left: 329px;
+        margin-bottom: 19px;
+        color: rgba(192, 192, 192, 1);
+        cursor: pointer;
+    }
+
+    .login__eye_blue {
+        position: absolute;
+        margin-left: 329px;
+        margin-bottom: 19px;
+        color: rgba(84, 88, 234, 1);
+        cursor: pointer;
     }
 }
 

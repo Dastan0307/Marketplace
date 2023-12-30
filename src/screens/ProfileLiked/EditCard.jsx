@@ -2,7 +2,7 @@
 import ClearIcon from '@mui/icons-material/Clear';
 import { Carousel } from 'antd';
 import snikersPicture from '../../assets/img/image 2.png'
-import PrimaryButton from '../../components/Button/Button';
+import { PrimaryButton } from '../../components/Button/Button';
 import './profile_liked.scss';
 
 const EditCard = ({ handleClose }) => {
