@@ -25,8 +25,8 @@ const AddCard = () => {
           setFiles([...files, inpRef.current.files[0]])
           formData.append(`files`, files);
       }
-      console.log(files)
-      console.log(formData.get("files"))
+      console.log('filesf',files)
+      console.log('formData', formData.get("files"));
     };
   
 
@@ -43,8 +43,8 @@ const AddCard = () => {
                 style={{display: 'none'}}
             />
                 <img src={addFotoIcon} alt="Error :("  onClick={()=>{ inpRef.current.click() }} /> 
-                { photos.map((item) => (
-                    <img src={item} alt="Error :(" style={{width: '76px', height: '96px', borderRadius: '12px'}} />
+                { photos.map((item, index) => (
+                    <img src={item} alt="Error :(" key={index} style={{width: '76px', height: '96px', borderRadius: '12px'}} />
                 )) }
             </div>
                 <input type="text" placeholder="Цена" value={price} onChange={(e) => setPrice(e.target.value)} />

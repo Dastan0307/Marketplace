@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import Backdrop from '@mui/material/Backdrop';
 import ClearIcon from '@mui/icons-material/Clear';
+import { ToastContainer } from "react-toastify";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import profileIcon from '../../assets/img/Frame 851212073.svg';
 import heartIcon from '../../assets/img/Frame 851212065.svg';
@@ -12,16 +13,18 @@ import backIcon from '../../assets/img/Frame 851211999.svg';
 import phoneIcon from '../../assets/img/Frame 860.svg';
 import Logout from "../../screens/Auth/Logout/Logout";
 import { checkAuth, addNumberUser } from '../../store/slices/auth/authSlice';
-import './profile.scss';
 import Timer from "./Timer";
-import UpdateProfile from "./UpdateProfile";
+import AddProfile from "./AddProfile";
+import EditProfile from "./EditProfile";
+import './profile.scss';
 
 const ProfilePage = (props) => {
     const [phone_number, setPhoneNumber] = useState('');
     const [open, setOpen] = useState(false);
-    const [updateProfile, setUpdateProfile] = useState(false);
+    const [addProfile, setAddProfile] = useState(false);
     const [changePhoneNumber, setChangePhoneNumber] = useState(false);
     const [logout, setLogout] = useState(false);
+    const [editProfile, setEditProfile] = useState(false);
     const [photos, setPhotos] = useState('');
     const [files, setFiles] = useState([])
 
@@ -42,8 +45,8 @@ const ProfilePage = (props) => {
         }};
 
     localStorage.setItem('user_photo', photos);
-    const userImg = localStorage.getItem('user_photo');
 
+    const userImg = localStorage.getItem('user_photo');
     const username = localStorage.getItem('username');
     const email = localStorage.getItem('email');
     const user_number = localStorage.getItem('phone_number');
@@ -74,36 +77,48 @@ const ProfilePage = (props) => {
         setLogout(true);
     };
 
-    const updateProfileClose = () => {
-        setUpdateProfile(false);
+    const addProfileClose = () => {
+        setAddProfile(false);
     };
-    const updateProfileOpen = () => {
-        setUpdateProfile(true);
+    const addProfileOpen = () => {
+        setAddProfile(true);
+    };
+
+    const editProfileClose = () => {
+        setEditProfile(false);
+    };
+    const editProfileOpen = () => {
+        setEditProfile(true);
     };
 
     useEffect(() => {
         if(localStorage.getItem('token')) {
-            checkAuth();
+            dispatch(checkAuth());
         };
       }, []);
 
 
     function handleNumber() {
-        dispatch(addNumberUser({ phone_number }))
-    }
+        dispatch(addNumberUser(phone_number));
+    };
   
     function checkPhoneNumber() {
+        handleNumber()
         changePhoneNumberOpen()
         handleClose()
-        handleNumber()
     };
 
 
   return (
     <div className="container" >
+        <ToastContainer />
         <div className="profile__menu_list">
             <div className="profile__user_name" >
-                <img src={profileIcon} alt="Error :(" style={{width: '60px'}} />
+                {
+                    userImg ? 
+                    <img src={userImg} alt="Error :(" style={{width: '60px',height: '60px',  borderRadius: '100px'}} /> :
+                    <img src={profileIcon} alt="Error :(" style={{width: '60px'}} /> 
+                }
                 <p>{username ? username : ''}<br /><span>{email ? email : ''}</span></p>
             </div>
             <div className="profile__menu_btns">
@@ -122,7 +137,7 @@ const ProfilePage = (props) => {
                 {
                     userImg ? 
                     <>
-                        <img src={userImg} alt="Error:(" style={{width: '80px', borderRadius: '100px'}} />
+                        <img src={userImg} alt="Error:(" style={{width: '80px',height: '80px',  borderRadius: '100px'}} />
                         <button onClick={()=>{inpRef.current.click()}}>Изменить фото</button> 
                     </>
                     :
@@ -141,18 +156,37 @@ const ProfilePage = (props) => {
                 <hr />
                 {birth_date ? <p className="profile__active_text">{ birth_date }</p> : <p>Дата рождения</p>}
             </div>
-                <button className="profile__btn_update" onClick={updateProfileOpen} >Изменить профиль</button>
+                {
+                    name.length || last_name.length || birth_date.length ?
+                    <button className="profile__btn_update" onClick={editProfileOpen}>Изменить профиль</button> :
+                    <button className="profile__btn_update" onClick={addProfileOpen}>Добавить профиль</button> 
+                }
             <div className="profile__contact_user">
-                <button className="profile__contact_btn" onClick={handleOpen}>Добавить номер<span>0(000) 000 000</span></button>
+                <button 
+                    className="profile__contact_btn" 
+                    onClick={handleOpen}>Добавить номер
+                    {
+                        user_number  ? 
+                            <strong style={{ color: 'rgba(73, 73, 73, 1)', fontSize: '20px' }}>{user_number}</strong> : 
+                            <span>0(000) 000 000</span>
+                    }
+                </button>
                 <hr />
                 <p>{email ? email : ''}</p>
-                {/* update profile  */}
+                {/* add profile  */}
                 <Backdrop
                     sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                    open={updateProfile}
+                    open={addProfile}
                 >
-                    <ClearIcon className="profile__update_icon" onClick={updateProfileClose} />
-                    <UpdateProfile />
+                    <ClearIcon className="profile__update_icon" onClick={addProfileClose} />
+                    <AddProfile addProfileClose={addProfileClose} />
+                </Backdrop> 
+                <Backdrop
+                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    open={editProfile}
+                >
+                    <ClearIcon className="profile__update_icon" onClick={editProfileClose} />
+                    <EditProfile editProfileClose={editProfileClose} />
                 </Backdrop> 
                 
                 {/* add number  */}
@@ -168,11 +202,6 @@ const ProfilePage = (props) => {
                         <p className="profile__contact_p">Мы отправим вам СМС с кодом подтверждения</p>
                         <input type="text" placeholder="0(000) 000 000" onChange={(e) => setPhoneNumber(e.target.value)} />
                         {
-                            user_number  ? 
-                                <strong style={{ color: 'red' }}>{user_number}</strong> : 
-                                <strong>0(000) 000 000</strong>
-                        }
-                        {
                             phone_number.length === 10 ? 
                             <button onClick={checkPhoneNumber} style={{background: 'rgba(84, 88, 234, 1)'}} 
                             >Далее</button> : 
@@ -187,7 +216,7 @@ const ProfilePage = (props) => {
                     open={changePhoneNumber}
                 >
                     <ClearIcon className="profile__icon_checkNumber" onClick={changePhoneNumberClose} />
-                    <Timer phone_number={phone_number} />
+                    <Timer phone_number={phone_number} changePhoneNumberClose={changePhoneNumberClose} />
                 </Backdrop> 
                 {/* exit  */}
 

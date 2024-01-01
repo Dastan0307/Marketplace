@@ -4,21 +4,22 @@ import { addNumberUser, sendCode } from '../../store/slices/auth/authSlice';
 import spinnerIcon from '../../assets/img/Frame 861.svg';
 import phoneIcon from '../../assets/img/Frame 860.svg';
 
-const Timer = ({ phone_number }) => {
+const Timer = ({ phone_number, changePhoneNumberClose }) => {
     const [time, setTime] = useState(60);
     const [timerEnd, setTimerEnd] = useState(false);
-    const [code_activation, setCodeActivation] = useState('');
+    const [code_activationn, setCodeActivation] = useState('');
 
     const dispatch = useDispatch();
     
     function againSendCode() {
-        dispatch(addNumberUser({ phone_number }))
+        dispatch(addNumberUser(phone_number));
     };
 
     const handleEnterKeyPress = (event) => {
         if (event.key === 'Enter') {
-            dispatch(sendCode({ code_activation }))
-            setCodeActivation('')
+            const code_activation = Number(code_activationn);
+            dispatch(sendCode({code_activation, phone_number, changePhoneNumberClose}));
+            setCodeActivation('');
         }
     }
     const startTimer = () => {
@@ -51,7 +52,7 @@ const Timer = ({ phone_number }) => {
                 <input 
                     type="text" 
                     placeholder="0 0 0 0" 
-                    value={code_activation}
+                    value={code_activationn}
                     onKeyDown={handleEnterKeyPress}
                     onChange={(e) => setCodeActivation(e.target.value)} />
                 {

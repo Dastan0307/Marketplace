@@ -3,23 +3,21 @@ import { Typography } from 'antd';
 import Backdrop from '@mui/material/Backdrop';
 import { HeartOutlined } from '@ant-design/icons';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import hugeIcon from '../../assets/img/more-vertical.svg';
-import editIcon from '../../assets/img/Frame 851212066.svg'
-import deleteIcon from '../../assets/img/Frame 8512120661.svg'
-import EditCard from "../../screens/ProfileLiked/EditCard";
-import DeleteCard from "../../screens/ProfileLiked/DeleteCard";
 import AboutCard from "../../screens/ProfileLiked/AboutCard";
 import './card.scss';
 
 const { Paragraph } = Typography;
 
-const ProductCard = ({ handleClickOpen }) => {
-  const [open, setOpen] = useState(false);
+const CardShow = ({ handleClickOpen }) => {
   const [openAboutCard, setOpenAboutCard] = useState(false);
-  const [openEdit, setOpenEdit] = useState(false);
-  const [openDelete, setOpenDelete] = useState(false);
   const [like, setLike] = useState(false);
   const [likeCount, setLikeCount] = useState(99);
+
+//   const {
+//     picture,
+//     title,
+//     price,
+//   } = value
 
 
   const handleCloseAboutCard = () => {
@@ -32,36 +30,12 @@ const ProductCard = ({ handleClickOpen }) => {
     setOpenAboutCard(true);
   };
 
-  const handleClose = () => {
-    setOpenEdit(false);
-  };
-
-  const handleOpen = () => {
-    setOpenEdit(true);
-  };
-
-  const openCardEdit = () => {
-    setOpen(false)
-    handleOpen()
-  }
-
-  const openDeleteCard = () => {
-    setOpenDelete(true);
-  };
-
-  const closeDeleteCard = () => {
-    setOpenDelete(false)
-  }
-
-  const openCardDelete = () => {
-    setOpen(false)
-    openDeleteCard()
-  }
 
   function handleDisLike() {
     setLike(false)
     setLikeCount(likeCount-1)
   };
+
   function handleLike() {
     setLike(true)
     setLikeCount(likeCount+1)
@@ -86,33 +60,7 @@ const ProductCard = ({ handleClickOpen }) => {
                   }
                   <Paragraph className="card__price">{ likeCount }</Paragraph>
                   </div>
-                <img src={hugeIcon} alt="error" width={24} style={{cursor: 'pointer'}} onClick={() => setOpen(true)} />
             </div>
-            {
-              open ? 
-              <div className="card__btns">
-                <button  onClick={() => openCardEdit()}><img src={editIcon} alt="Error :(" />Изменить</button>
-                <hr />
-                <button onClick={() => openCardDelete()}><img src={deleteIcon} alt="Error :(" />Удалить</button>
-              </div>
-            :
-              ''
-            }
-            {/* edit  */}
-              <Backdrop
-                  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                  open={openEdit}
-              >
-                  <EditCard handleClose={handleClose} />
-              </Backdrop>
-              {/* delete  */}
-              <Backdrop
-                  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                  open={openDelete}
-              >
-                  <DeleteCard closeDeleteCard={closeDeleteCard} />
-              </Backdrop>
-              {/* inforation about card  */}
               <Backdrop
                   sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                   open={openAboutCard}
@@ -123,4 +71,4 @@ const ProductCard = ({ handleClickOpen }) => {
   )
 };
 
-export default ProductCard;
+export default CardShow;

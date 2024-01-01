@@ -12,13 +12,24 @@ import Card from '../../components/Card/Card';
 const ProfileLiked = () => {
     const navigate = useNavigate();
 
+    const userImg = localStorage.getItem('user_photo');
+    const username = localStorage.getItem('username');
+    const email = localStorage.getItem('email');
 
   return (
         <div className="container" >
             <div className="profile__menu_list">
                 <div className="profile__user_name" onClick={() => navigate('/profile')}>
-                    <img src={profileIcon} alt="Error :(" style={{width: '60px'}} />
-                    <p>Алесястар<br /><span>sergeykrash01</span></p>
+                    {
+                        userImg ?
+                        <img src={userImg} alt="Error :(" style={{width: '60px', height: '60px', borderRadius: '100%'}} /> :
+                        <img src={profileIcon} alt="Error :(" style={{width: '60px'}} />
+                    }
+                    {
+                        username ? 
+                        <p>{username}<br /><span>{email}</span></p> :
+                        <p><br /><span></span></p>
+                    }
                 </div>
                 <div className="profile__menu_btns">
                     <button><p><img src={heartIcon} alt="Error :(" style={{width: '30'}} />Понравившиеся</p> <ArrowForwardIosIcon /></button>

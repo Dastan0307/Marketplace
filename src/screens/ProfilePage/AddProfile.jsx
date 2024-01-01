@@ -4,15 +4,15 @@ import { GreyButton, PrimaryButton } from "../../components/Button/Button";
 import { updateUserProfile } from "../../store/slices/profile/profileSlice";
 import { ToastContainer } from "react-toastify";
 
-const UpdateProfile = () => {
+const AddProfile = ({ addProfileClose }) => {
     const [name, setName] = useState('');
     const [last_name, setLastName] = useState('');
     const [birth_date, setBirthDate] = useState('');
 
     const dispatch = useDispatch();
 
-    function handleUpdateProfile() {
-        dispatch(updateUserProfile({ name, last_name, birth_date }));
+    function handleAddProfile() {
+        dispatch(updateUserProfile({ name, last_name, birth_date, addProfileClose }));
         setName('');
         setLastName('');
         setBirthDate('');
@@ -28,10 +28,10 @@ const UpdateProfile = () => {
         {
             name.length === 0 || last_name.length === 0 || birth_date.length === 0 ? 
             <GreyButton>Изменить</GreyButton> :
-            <PrimaryButton onClick={handleUpdateProfile}>Изменить</PrimaryButton> 
+            <PrimaryButton onClick={handleAddProfile}>Изменить</PrimaryButton> 
         }
     </div>
   )
 };
 
-export default UpdateProfile;
+export default AddProfile;

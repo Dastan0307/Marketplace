@@ -10,6 +10,7 @@ const Header = ({ handleClickOpen }) => {
 
   const username = localStorage.getItem('username');
   const email = localStorage.getItem('email');
+  const userImg = localStorage.getItem('user_photo');
 
   return (
     <div className="header">
@@ -18,7 +19,11 @@ const Header = ({ handleClickOpen }) => {
             <PrimaryButton onClick={handleClickOpen}>Подать объявление</PrimaryButton>
             <div className="header__user" onClick={() => navigate('/profile')} >
                 <p>{username ? username : ''}<br /><span>{email ? email : ''}</span></p>
-                <img src={headerIcon} alt="Error :("  />
+                {
+                  userImg ? 
+                  <img src={userImg} alt="Error :(" style={{width: '60px',height: '60px',  borderRadius: '100px'}} /> :
+                  <img src={headerIcon} alt="Error :(" style={{width: '60px'}} /> 
+                }
             </div>
         </div>
     </div>

@@ -47,7 +47,7 @@ export const loginUserAsync = createAsyncThunk('auth/loginUserAsync', async (aut
 export const checkAuth = createAsyncThunk('auth/checkAuth', async () => {
   let token = JSON.parse(localStorage.getItem('token'));
   try {
-      const Authorization = `Bearer ${token.access}`; //JWT
+      const Authorization = `Bearer ${token.access}`; 
       let response = await axios.post(`${API}/token/refresh/`,
        { refresh: token.refresh }, 
        { headers: { Authorization } });
@@ -64,17 +64,21 @@ export const addNumberUser = createAsyncThunk('auth/addNumberUser', async (phone
     const response = await axios.post(`${API}/add_phone_number/`, 
     { phone_number }, 
     { headers: { Authorization } });
-    localStorage.setItem('phone_number', phone_number);
     return response.data;
   } catch (error) {
     throw error; 
   }
 });
 
-export const sendCode = createAsyncThunk('auth/senCode', async (code_activation) => {
+export const sendCode = createAsyncThunk('auth/senCode', async ({ code_activation, phone_number, changePhoneNumberClose }) => {
+  let token = JSON.parse(localStorage.getItem('token'));
   try {
-    console.log(code_activation);
-    const response = await axios.post(`${API}/activate_phone_number/`, { code_activation });
+    const Authorization = `Bearer ${token.access}`;
+    const response = await axios.post(`${API}/activate_phone_number/`, 
+    { code_activation }, 
+    { headers: { Authorization } });
+    localStorage.setItem('phone_number', phone_number);
+    changePhoneNumberClose();
     return response.data;
   } catch (error) {
     throw error; 
@@ -108,6 +112,12 @@ const authSlice = createSlice({
     })
     .addCase(loginUserAsync.rejected, (state, action) => {
       toast.error('Неверный логин или пароль');
+    })
+    .addCase(sendCode.fulfilled, (state, action) => {
+      toast.success('Номер успешно добавлен');
+    })
+    .addCase(sendCode.rejected, (state, action) => {
+      toast.error('Неверный код !');
     }) }
 })
 

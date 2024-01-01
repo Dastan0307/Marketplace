@@ -11,41 +11,67 @@ const initialState = {
 }
 
 
-export const updateUserProfile = createAsyncThunk('profile/updateUserProfile', async (authData) => {
-      let token = JSON.paccrse(localStorage.getItem('token'));
+export const updateUserProfile = createAsyncThunk('profile/updateUserProfile', async (updateDate) => {
+      let token = JSON.parse(localStorage.getItem('token'));
     try {
       const Authorization = `Bearer ${token.access}`; //JWT
-      const { name, last_name, birth_date } = authData;
-      console.log(name);
+      const { name, last_name, birth_date, addProfileClose } = updateDate;
       const response = await axios.post(`${API}/profile/`, 
-      authData,
+      updateDate,
       { headers: { Authorization } });
       localStorage.setItem('name', name);
       localStorage.setItem('last_name', last_name);
       localStorage.setItem('birth_date', birth_date);
-
+      addProfileClose();
       return response.data;
     } catch (error) {
-      localStorage.clear();
       throw error; 
     }
 });
 
 
+export const editProfile = createAsyncThunk('profile/editProfile', async (updateDate) => {
+  let token = JSON.parse(localStorage.getItem('token'));
+try {
+  const Authorization = `Bearer ${token.access}`; //JWT
+  const { name, last_name, birth_date, editProfileClose } = updateDate;
+  const response = await axios.patch(`${API}/profile/`, 
+  updateDate,
+  { headers: { Authorization } });
+  localStorage.setItem('name', name);
+  localStorage.setItem('last_name', last_name);
+  localStorage.setItem('birth_date', birth_date);
+  editProfileClose();
+  return response.data;
+} catch (error) {
+  throw error; 
+}
+});
+
+
 const profileSlices = createSlice({
-    name: 'auth',
+    name: 'profile',
     initialState,
     reducers: {},
     extraReducers: (builder) => {
       builder
       .addCase(updateUserProfile.fulfilled, (state, action) => {
-        toast.success('Вы успешно изменили профиль !');
+        toast.success('Вы успешно добавили профиль ');
         state.name = action.payload;
         state.last_name = action.payload;
         state.birth_date = action.payload;
       })
       .addCase(updateUserProfile.rejected, (state, action) => {
-        toast.error('У вас не получилось изменить профиль !');
+        toast.error('Данные не были добавлены');
+      })
+      .addCase(editProfile.fulfilled, (state, action) => {
+        toast.success('Вы успешно изменили профиль');
+        state.name = action.payload;
+        state.last_name = action.payload;
+        state.birth_date = action.payload;
+      })
+      .addCase(editProfile.rejected, (state, action) => {
+        toast.error('Данные не были добавшены изменены');
       })
   }})
   
