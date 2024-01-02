@@ -5,7 +5,6 @@ import Login from './screens/Auth/Login/Login';
 import ProfilePage from './screens/ProfilePage/ProfilePage';
 import ProfileLiked from './screens/ProfileLiked/ProfileLiked';
 import Main from './screens/Main/Main';
-import Tester from './screens/ProfilePage/Tester';
 
 function App() {
   return (
@@ -17,7 +16,6 @@ function App() {
         <Route path="/password" element={<Password />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/profile_liked" element={<ProfileLiked />} />
-        <Route path="/log" element={<Tester />} />
       </Routes>
     </div>
   );

@@ -16,6 +16,7 @@ import { checkAuth, addNumberUser } from '../../store/slices/auth/authSlice';
 import Timer from "./Timer";
 import AddProfile from "./AddProfile";
 import EditProfile from "./EditProfile";
+import { EditPhoneNumber } from "./EditPhoneNumber";
 import './profile.scss';
 
 const ProfilePage = (props) => {
@@ -25,6 +26,7 @@ const ProfilePage = (props) => {
     const [changePhoneNumber, setChangePhoneNumber] = useState(false);
     const [logout, setLogout] = useState(false);
     const [editProfile, setEditProfile] = useState(false);
+    const [editPhoneNumber, setEditPhoneNumber] = useState(false);
     const [photos, setPhotos] = useState('');
     const [files, setFiles] = useState([])
 
@@ -91,11 +93,18 @@ const ProfilePage = (props) => {
         setEditProfile(true);
     };
 
+    const editPhoneNumberclose = () => {
+        setEditPhoneNumber(false);
+    };
+    const editPhoneNumberOpen = () => {
+        setEditPhoneNumber(true);
+    };
+
     useEffect(() => {
         if(localStorage.getItem('token')) {
             dispatch(checkAuth());
         };
-      }, []);
+      }, [dispatch]);
 
 
     function handleNumber() {
@@ -162,15 +171,20 @@ const ProfilePage = (props) => {
                     <button className="profile__btn_update" onClick={addProfileOpen}>Добавить профиль</button> 
                 }
             <div className="profile__contact_user">
-                <button 
-                    className="profile__contact_btn" 
-                    onClick={handleOpen}>Добавить номер
-                    {
-                        user_number  ? 
-                            <strong style={{ color: 'rgba(73, 73, 73, 1)', fontSize: '20px' }}>{user_number}</strong> : 
+               {
+                user_number ?
+                    <button 
+                        className="profile__contact_btn" 
+                        onClick={editPhoneNumberOpen}>Изменить номер
+                            <strong style={{ color: 'rgba(73, 73, 73, 1)', fontSize: '20px' }}>{user_number}</strong> 
+                    </button>
+                    :
+                    <button 
+                        className="profile__contact_btn" 
+                        onClick={handleOpen}>Добавить номер
                             <span>0(000) 000 000</span>
-                    }
-                </button>
+                    </button>
+               } 
                 <hr />
                 <p>{email ? email : ''}</p>
                 {/* add profile  */}
@@ -217,6 +231,14 @@ const ProfilePage = (props) => {
                 >
                     <ClearIcon className="profile__icon_checkNumber" onClick={changePhoneNumberClose} />
                     <Timer phone_number={phone_number} changePhoneNumberClose={changePhoneNumberClose} />
+                </Backdrop> 
+                {/* Edit phone number  */}
+                <Backdrop
+                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    open={editPhoneNumber}
+                >
+                    <ClearIcon className="profile__icon_checkNumber" onClick={editPhoneNumberclose} />
+                    <EditPhoneNumber editPhoneNumberclose={editPhoneNumberclose} />
                 </Backdrop> 
                 {/* exit  */}
 

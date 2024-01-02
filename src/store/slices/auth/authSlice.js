@@ -85,6 +85,21 @@ export const sendCode = createAsyncThunk('auth/senCode', async ({ code_activatio
   }
 });
 
+export const editPhoneNumber = createAsyncThunk('profile/editPhoneNumber', async ({ phone_number, editPhoneNumberclose }) => {
+    let token = JSON.parse(localStorage.getItem('token'));
+  try {
+    const Authorization = `Bearer ${token.access}`; 
+    const response = await axios.put(`${API}/add_phone_number/`, 
+    { phone_number },
+    { headers: { Authorization } });
+    localStorage.setItem('phone_number', phone_number);
+    editPhoneNumberclose();
+    return response.data;
+  } catch (error) {
+    throw error; 
+  }
+});
+
 
 const authSlice = createSlice({
   name: 'auth',
@@ -118,7 +133,14 @@ const authSlice = createSlice({
     })
     .addCase(sendCode.rejected, (state, action) => {
       toast.error('Неверный код !');
-    }) }
+    }) 
+    .addCase(editPhoneNumber.fulfilled, (state, action) => {
+      toast.success('Номер изменён');
+    })
+    .addCase(editPhoneNumber.rejected, (state, action) => {
+      toast.error('Номер не изменён');
+    })
+  }
 })
 
 export const { setNameEmail } = authSlice.actions

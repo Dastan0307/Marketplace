@@ -10,7 +10,6 @@ const initialState = {
   birth_date: ''
 }
 
-
 export const updateUserProfile = createAsyncThunk('profile/updateUserProfile', async (updateDate) => {
       let token = JSON.parse(localStorage.getItem('token'));
     try {
@@ -30,22 +29,23 @@ export const updateUserProfile = createAsyncThunk('profile/updateUserProfile', a
 });
 
 
+
 export const editProfile = createAsyncThunk('profile/editProfile', async (updateDate) => {
-  let token = JSON.parse(localStorage.getItem('token'));
-try {
-  const Authorization = `Bearer ${token.access}`; //JWT
-  const { name, last_name, birth_date, editProfileClose } = updateDate;
-  const response = await axios.patch(`${API}/profile/`, 
-  updateDate,
-  { headers: { Authorization } });
-  localStorage.setItem('name', name);
-  localStorage.setItem('last_name', last_name);
-  localStorage.setItem('birth_date', birth_date);
-  editProfileClose();
-  return response.data;
-} catch (error) {
-  throw error; 
-}
+      let token = JSON.parse(localStorage.getItem('token'));
+    try {
+      const Authorization = `Bearer ${token.access}`; //JWT
+      const { name, last_name, birth_date, editProfileClose } = updateDate;
+      const response = await axios.patch(`${API}/profile/`, 
+      updateDate,
+      { headers: { Authorization } });
+      localStorage.setItem('name', name);
+      localStorage.setItem('last_name', last_name);
+      localStorage.setItem('birth_date', birth_date);
+      editProfileClose();
+      return response.data;
+    } catch (error) {
+      throw error; 
+    }
 });
 
 
@@ -75,5 +75,5 @@ const profileSlices = createSlice({
       })
   }})
   
-  export const {  } = profileSlices.actions
+  // export const {  } = profileSlices.actions
   export default profileSlices.reducer
