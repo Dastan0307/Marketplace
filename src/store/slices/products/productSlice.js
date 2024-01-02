@@ -38,17 +38,17 @@ export const addProduct = createAsyncThunk('product/addProduct', async (updateDa
     }
 });
 
-export const getProduct = createAsyncThunk('product/getProduct', async () => {
-    let token = JSON.parse(localStorage.getItem('token'));
-  try {
-    const Authorization = `Bearer ${token.access}`; //JWT
-    const response = await axios.get(`${API}/product/`,{ headers: { Authorization } });
-    console.log("Succes");
-    return response.data;
-  } catch (error) {
-    throw error; 
-  }
-});
+// export const getProduct = createAsyncThunk('product/getProduct', async () => {
+//     let token = JSON.parse(localStorage.getItem('token'));
+//   try {
+//     const Authorization = `Bearer ${token.access}`; //JWT
+//     const response = await axios.get(`${API}/product/`,{ headers: { Authorization } });
+//     console.log("Succes");
+//     return response.data;
+//   } catch (error) {
+//     throw error; 
+//   }
+// });
 
 
 const productSlice = createSlice({
@@ -63,19 +63,19 @@ const productSlice = createSlice({
       .addCase(addProduct.rejected, (state, action) => {
         toast.error('Продукт не добавлен !')
       }) 
-      .addCase(getProduct.fulfilled, (state, action) => {
-        state.id = action.payload
-        state.title = action.payload
-        state.price = action.payload
-        state.photo.push(action.payload)
-        state.short_description = action.payload
-        state.long_description = action.payload
-        state.likes.push(action.payload)
-        state.all_likes = action.payload
-      }) 
-      .addCase(getProduct.rejected, (state, action) => {
-        toast.warning('Ошибка с сервера, продукты не получены')
-      }) 
+    //   .addCase(getProduct.fulfilled, (state, action) => {
+    //     state.id = action.payload
+    //     state.title = action.payload
+    //     state.price = action.payload
+    //     state.photo.push(action.payload)
+    //     state.short_description = action.payload
+    //     state.long_description = action.payload
+    //     state.likes.push(action.payload)
+    //     state.all_likes = action.payload
+    //   }) 
+    //   .addCase(getProduct.rejected, (state, action) => {
+    //     toast.warning('Ошибка с сервера, продукты не получены')
+    //   }) 
     }})
   
   export const {  } = productSlice.actions

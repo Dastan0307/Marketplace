@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { ToastContainer } from "react-toastify";
 import { GreyButton, PrimaryButton } from "../../components/Button/Button";
 import addFotoIcon from '../../assets/img/Frame 851212085.svg'
-import { addProduct } from "../../store/slices/products/productSlice";  
+// import { addProduct } from "../../store/slices/products/productSlice";  
 import './add_card.scss';
 
 const AddProduct = () => {
@@ -34,13 +34,13 @@ const AddProduct = () => {
     };
 
     function handleAddProduct() {
-      const price = Number(price_card);
-      dispatch(addProduct({ title, price, photo, short_description, long_description, likes }))
-      setTitle('')
-      setPrice('')
-      setShortDescription('')
-      setLongDescription('')
-      setFiles([])
+      // const price = Number(price_card);
+      // dispatch(addProduct({ title, price, photo, short_description, long_description, likes }))
+      // setTitle('')
+      // setPrice('')
+      // setShortDescription('')
+      // setLongDescription('')
+      // setFiles([])
     };
   
 
