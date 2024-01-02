@@ -157,9 +157,9 @@ const ProfilePage = (props) => {
                 {birth_date ? <p className="profile__active_text">{ birth_date }</p> : <p>Дата рождения</p>}
             </div>
                 {
-                    name || last_name || birth_date ?
-                    <button className="profile__btn_update" onClick={addProfileOpen}>Добавить профиль</button> :
-                    <button className="profile__btn_update" onClick={editProfileOpen}>Изменить профиль</button>
+                    name != null | undefined || last_name != null | undefined || birth_date!= null | undefined ?
+                    <button className="profile__btn_update" onClick={editProfileOpen}>Изменить профиль</button> :
+                    <button className="profile__btn_update" onClick={addProfileOpen}>Добавить профиль</button> 
                 }
             <div className="profile__contact_user">
                 <button 
