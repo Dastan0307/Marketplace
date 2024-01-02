@@ -30,7 +30,7 @@ const EditProfile = ({ editProfileClose }) => {
         <input type="text" placeholder="Фамилия" value={last_name} onChange={(e) => setLastName(e.target.value)} />
         <input type="text" placeholder="Дата рождения" value={birth_date} onChange={(e) => setBirthDate(e.target.value)} />
         {
-            name.length === 0 || last_name.length === 0 || birth_date.length === 0 ? 
+            name ? 
             <GreyButton>Изменить</GreyButton> :
             <PrimaryButton onClick={handleEditProfile}>Изменить</PrimaryButton> 
         }
