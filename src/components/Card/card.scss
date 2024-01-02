@@ -21,6 +21,7 @@
     align-items: center;
     font-family: 'Gotham Pro', sans-serif;
     margin: 10px 0;
+    text-align: start;
 
     .card__description {
         width: 142px;
@@ -33,13 +34,12 @@
     }
 
     .card__description_price {
+        width: 142px; 
         font-family: 'Gotham Pro', sans-serif;
         font-weight: 600;
         font-size: 14px;
         color: rgba(93, 95, 239, 1);
-        text-align: end;
-        margin-right: 75px;
-        margin-top: 5px;
+
     }
 
     .card__fuctional {

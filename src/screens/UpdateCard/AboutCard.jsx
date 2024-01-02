@@ -2,10 +2,13 @@
 import ClearIcon from '@mui/icons-material/Clear';
 import { Carousel } from 'antd';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useSelector } from 'react-redux';
 import snikersPicture from '../../assets/img/image 2.png'
-import './profile_liked.scss';
+import '../ProfileLiked/profile_liked.scss';
 
-const AboutCard = ({ handleCloseAboutCard }) => {
+const AboutCard = ({ handleCloseAboutCard, id }) => {
+    const { about_product } = useSelector((state) => state.product);
+
     const onChange = (currentSlide) => {
         console.log(currentSlide);
     };
@@ -28,15 +31,15 @@ const AboutCard = ({ handleCloseAboutCard }) => {
                 </div>
             </Carousel>
             <div className="about__card">
-                <h3 className='about__card_price'>12000 сом</h3>
+                <h3 className='about__card_price'>{about_product.price} $</h3>
                 <div className="card__like">
                     <FavoriteIcon className='card__like_icon' />
                     <p>Нравится: 1 M</p>
                 </div>
-                <h3 className='about__card_title'>Adidas Yeezy 500</h3>
-                <p className='about__title_p'>The Yeezy 500 Blush is a limited edition shoe designed by Kanye West for Adidas</p>
+                <h3 className='about__card_title'>{about_product.title}</h3>
+                <p className='about__title_p'>{about_product.short_description}</p>
                 <h3 className='card__about_description'>Детальное описание</h3>
-                <p className='card__description_p'>It features a unique design, with a chunky silhouette and a blush colorway. The shoe has a mix of suede, mesh and leather, and it's considered a highly sought-after item among shoe enthusiasts.</p>
+                <p className='card__description_p'>{about_product.long_description}</p>
             </div>
         </div>
     </div>

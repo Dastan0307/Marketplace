@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { ToastContainer } from "react-toastify";
 import { GreyButton, PrimaryButton } from "../../components/Button/Button";
 import addFotoIcon from '../../assets/img/Frame 851212085.svg'
-// import { addProduct } from "../../store/slices/products/productSlice";  
+import { addProduct } from "../../store/slices/products/productSlice";  
 import './add_card.scss';
 
 const AddProduct = () => {
@@ -12,7 +12,7 @@ const AddProduct = () => {
     const [short_description, setShortDescription] = useState('');
     const [long_description, setLongDescription] = useState('');
     const [photo, setPhotos] = useState([]);
-    const [likes, setLikes] = useState([1, 2, 3]);
+    const [likes, setLikes] = useState([1]);
     const [files, setFiles] = useState([]);
 
     const dispatch = useDispatch();
@@ -34,13 +34,14 @@ const AddProduct = () => {
     };
 
     function handleAddProduct() {
-      // const price = Number(price_card);
-      // dispatch(addProduct({ title, price, photo, short_description, long_description, likes }))
-      // setTitle('')
-      // setPrice('')
-      // setShortDescription('')
-      // setLongDescription('')
-      // setFiles([])
+      const price = Number(price_card);
+      const photo = files;
+      dispatch(addProduct({ title, price, short_description, long_description, likes }))
+      setTitle('')
+      setPrice('')
+      setShortDescription('')
+      setLongDescription('')
+      setFiles([])
     };
   
 

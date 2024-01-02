@@ -2,7 +2,7 @@
 import deleteImg from '../../assets/img/trash.svg'
 import { PrimaryButton } from '../../components/Button/Button';
 import { Button } from 'antd';
-import './profile_liked.scss';
+import '../ProfileLiked/profile_liked.scss';
 
 
 const DeleteCard = ({ closeDeleteCard }) => {

@@ -5,6 +5,9 @@ import Login from './screens/Auth/Login/Login';
 import ProfilePage from './screens/ProfilePage/ProfilePage';
 import ProfileLiked from './screens/ProfileLiked/ProfileLiked';
 import Main from './screens/Main/Main';
+import EditCard from './screens/UpdateCard/EditCard';
+import CardShow from './components/Card/CardShow';
+import MyProducts from './screens/MyProducts/MyProducts';
 
 function App() {
   return (
@@ -16,6 +19,9 @@ function App() {
         <Route path="/password" element={<Password />} />
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/profile_liked" element={<ProfileLiked />} />
+        <Route path="/my-products" element={<MyProducts />} />
+        <Route path="/edit-card/:id" element={<EditCard />} />
+        <Route path="/show-card/:id" element={<CardShow />} />
       </Routes>
     </div>
   );

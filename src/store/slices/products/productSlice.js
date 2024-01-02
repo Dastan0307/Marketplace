@@ -5,50 +5,70 @@ import axios from 'axios';
 const API = 'https://kunasyl-backender.org.kg/goods';
 
 const initialState = {
-    id: null,
-    title: '',
-    price: '',
-    photo: [],
-    short_description: '',
-    long_description: '',
-    likes: [],
-    all_likes: ''
+    products: [],
+    about_product: [],
+    my_products: [],
 }
 
 
-export const addProduct = createAsyncThunk('product/addProduct', async (updateDate) => {
+export const addProduct = createAsyncThunk('product/addProduct', async (addProduct) => {
       let token = JSON.parse(localStorage.getItem('token'));
-      const { title, price, photo, short_description, long_description, likes } = updateDate;
-      let formData = new FormData();
-      formData.append('title', title);
-      formData.append('price', price);
-      formData.append('photo', photo[0]);
-      formData.append('short_description', short_description);
-      formData.append('long_description', long_description);
-      formData.append('likes', likes);
     try {
       const Authorization = `Bearer ${token.access}`; //JWT
       const response = await axios.post(`${API}/product/`, 
-      formData,
+      addProduct,
       { headers: { Authorization } });
-      console.log("Succes");
       return response.data;
     } catch (error) {
       throw error; 
     }
 });
 
-// export const getProduct = createAsyncThunk('product/getProduct', async () => {
-//     let token = JSON.parse(localStorage.getItem('token'));
-//   try {
-//     const Authorization = `Bearer ${token.access}`; //JWT
-//     const response = await axios.get(`${API}/product/`,{ headers: { Authorization } });
-//     console.log("Succes");
-//     return response.data;
-//   } catch (error) {
-//     throw error; 
-//   }
-// });
+export const getProduct = createAsyncThunk('product/getProduct', async () => {
+      let token = JSON.parse(localStorage.getItem('token'));
+    try {
+      const Authorization = `Bearer ${token.access}`; //JWT
+      const response = await axios.get(`${API}/products_all/`, { headers: { Authorization } });
+      return response.data;
+    } catch (error) {
+      throw error; 
+    }
+});
+
+export const getMyProducts = createAsyncThunk('product/getMyProducts', async () => {
+  let token = JSON.parse(localStorage.getItem('token'));
+try {
+  const Authorization = `Bearer ${token.access}`; //JWT
+  const response = await axios.get(`${API}/products_user/`, { headers: { Authorization } });
+  return response.data;
+} catch (error) {
+  throw error; 
+}
+});
+
+export const getProductId = createAsyncThunk('product/getProductId', async (id) => {
+      let token = JSON.parse(localStorage.getItem('token'));
+    try {
+      const Authorization = `Bearer ${token.access}`; //JWT
+      const response = await axios.get(`${API}/product/${id}/`, { headers: { Authorization } });
+      return response.data;
+    } catch (error) {
+      throw error; 
+    }
+});
+
+export const editCardProduct = createAsyncThunk('product/getProductId', async (id) => {
+  let token = JSON.parse(localStorage.getItem('token'));
+try {
+  const Authorization = `Bearer ${token.access}`; //JWT
+  const response = await axios.patch(`${API}/product/${id}/`, 
+  { headers: { Authorization } });
+  return response.data;
+} catch (error) {
+  throw error; 
+}
+});
+
 
 
 const productSlice = createSlice({
@@ -61,21 +81,20 @@ const productSlice = createSlice({
         toast.success('Продукт успешно добавлен')
       }) 
       .addCase(addProduct.rejected, (state, action) => {
-        toast.error('Продукт не добавлен !')
+        toast.error('Продукт не добавлен')
       }) 
-    //   .addCase(getProduct.fulfilled, (state, action) => {
-    //     state.id = action.payload
-    //     state.title = action.payload
-    //     state.price = action.payload
-    //     state.photo.push(action.payload)
-    //     state.short_description = action.payload
-    //     state.long_description = action.payload
-    //     state.likes.push(action.payload)
-    //     state.all_likes = action.payload
-    //   }) 
-    //   .addCase(getProduct.rejected, (state, action) => {
-    //     toast.warning('Ошибка с сервера, продукты не получены')
-    //   }) 
+      .addCase(getProduct.fulfilled, (state, action) => {
+        state.products = action.payload
+      }) 
+      .addCase(getProduct.rejected, (state, action) => {
+        toast.warning('Ошибка с сервера, продукты не получены')
+      }) 
+      .addCase(getProductId.fulfilled, (state, action) => {
+        state.about_product = action.payload
+      }) 
+      .addCase(getMyProducts.fulfilled, (state, action) => {
+        state.my_products = action.payload
+      }) 
     }})
   
   export const {  } = productSlice.actions

@@ -3,17 +3,19 @@ import { Typography } from 'antd';
 import Backdrop from '@mui/material/Backdrop';
 import { HeartOutlined } from '@ant-design/icons';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useDispatch } from "react-redux";
 import hugeIcon from '../../assets/img/more-vertical.svg';
 import editIcon from '../../assets/img/Frame 851212066.svg'
 import deleteIcon from '../../assets/img/Frame 8512120661.svg'
-import EditCard from "../../screens/ProfileLiked/EditCard";
-import DeleteCard from "../../screens/ProfileLiked/DeleteCard";
-import AboutCard from "../../screens/ProfileLiked/AboutCard";
+import EditCard from "../../screens/UpdateCard/EditCard";
+import DeleteCard from "../../screens/UpdateCard/DeleteCard";
+import AboutCard from "../../screens/UpdateCard/AboutCard";
+import { editCardProduct } from "../../store/slices/products/productSlice";
 import './card.scss';
 
 const { Paragraph } = Typography;
 
-const ProductCard = ({ handleClickOpen }) => {
+const ProductCard = ({ handleClickOpen, product }) => {
   const [open, setOpen] = useState(false);
   const [openAboutCard, setOpenAboutCard] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
@@ -21,11 +23,11 @@ const ProductCard = ({ handleClickOpen }) => {
   const [like, setLike] = useState(false);
   const [likeCount, setLikeCount] = useState(99);
 
+  const dispatch = useDispatch();
+
 
   const handleCloseAboutCard = () => {
-    console.log('start');
     setOpenAboutCard(false);
-    console.log('end');
   };
 
   const handleOpenAboutCard = () => {
@@ -40,9 +42,10 @@ const ProductCard = ({ handleClickOpen }) => {
     setOpenEdit(true);
   };
 
-  const openCardEdit = () => {
+  const openCardEdit = (id) => {
     setOpen(false)
     handleOpen()
+    dispatch(editCardProduct(id))
   }
 
   const openDeleteCard = () => {
@@ -75,8 +78,8 @@ const ProductCard = ({ handleClickOpen }) => {
             src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
             onClick={handleClickOpen}
             />
-            <p className="card__description" onClick={() => handleOpenAboutCard()} >BMW M4 Coupe: A Two-Door</p>
-            <p className="card__description_price" >23 000 $</p>
+            <p className="card__description" onClick={() => handleOpenAboutCard()} >{product.title}</p>
+            <p className="card__description_price" >{product.price} $</p>
             <div className="card__fuctional">
                 <div style={{display: 'flex', justifyContent: 'center', marginTop: '5px'}}>
                   {
@@ -91,7 +94,7 @@ const ProductCard = ({ handleClickOpen }) => {
             {
               open ? 
               <div className="card__btns">
-                <button  onClick={() => openCardEdit()}><img src={editIcon} alt="Error :(" />Изменить</button>
+                <button  onClick={() => openCardEdit(product.id)}><img src={editIcon} alt="Error :(" />Изменить</button>
                 <hr />
                 <button onClick={() => openCardDelete()}><img src={deleteIcon} alt="Error :(" />Удалить</button>
               </div>

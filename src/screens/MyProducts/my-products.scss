@@ -1,0 +1,107 @@
+@font-face {
+    font-family: 'Gotham Pro';
+    src:
+        url('../../assets/fonts/Gotham Pro/gothampro.ttf') format('truetype');  
+    font-style: normal;
+  }
+
+.container {
+    width: 1440px;
+    height: 1024px;
+    display: flex;
+    background-color: rgba(247, 246, 249, 1);
+}
+
+.profile__menu_list {
+    width: 540px;
+    height: 1024px;
+    background-color: rgba(255, 255, 255, 1);
+
+    .profile__user_name {
+        display: flex;
+        align-items: center;
+        font-family: 'Gotham Pro', sans-serif;
+        margin: 20px 0 10px 30px;
+        cursor: pointer;
+        
+        p {
+            font-weight: 600;
+            color: rgba(73, 73, 73, 1);
+            margin-left: 10px;
+        }
+        span {
+            font-weight: 400;
+        }
+    }
+
+    .profile__menu_btns {
+        margin-top: 40px;
+    }
+
+    button {
+        width: 456px;
+        height: 35px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border: none;
+        background-color: transparent;
+        color: rgba(73, 73, 73, 1);
+        cursor: pointer;
+        margin: 10px 0 20px 30px;
+
+        p {
+            font-family: 'Gotham Pro', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+
+            img {
+                margin-right: 10px;
+            }
+        }
+    }
+    button:last-child {
+        margin-top: 52px;
+    }
+}
+
+.profile__user {
+    width: 900px;
+    height: 1024px;
+
+    .back__btn {
+        width: 636px;
+        height: 74px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        font-family: 'Gotham Pro', sans-serif;
+        font-weight: 700;
+        font-size: 18px;
+        color: rgba(73, 73, 73, 1);
+        button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            font-family: 'Gotham Pro', sans-serif;
+            font-weight: 700;
+            font-size: 18px;
+            color: rgba(73, 73, 73, 1);
+            background-color: transparent;
+        }
+    }
+
+    .product__list {
+        width: 682px;
+        height: 584px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-content: center;
+        margin: auto;
+    }
+
+}

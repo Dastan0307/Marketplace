@@ -1,20 +1,30 @@
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getMyProducts } from '../../store/slices/products/productSlice';
 import profileIcon from '../../assets/img/Frame 851212073.svg';
 import heartIcon from '../../assets/img/Frame 851212065.svg';
 import productIcon from '../../assets/img/Frame 8512120651.svg';
 import exitIcon from '../../assets/img/Frame 8512120652.svg';
 import backIcon from '../../assets/img/Frame 851211999.svg';
-import './profile_liked.scss';
 import Card from '../../components/Card/Card';
+import '../ProfileLiked/profile_liked.scss';
 
 
-const ProfileLiked = () => {
+const MyProducts = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { my_products } = useSelector((state) => state.product);
+
 
     const userImg = localStorage.getItem('user_photo');
     const username = localStorage.getItem('username');
     const email = localStorage.getItem('email');
+
+    useEffect(() => {
+        dispatch(getMyProducts())
+    }, [dispatch]);
 
   return (
         <div className="container" >
@@ -32,29 +42,26 @@ const ProfileLiked = () => {
                     }
                 </div>
                 <div className="profile__menu_btns">
-                    <button><p><img src={heartIcon} alt="Error :(" style={{width: '30'}} />Понравившиеся</p> <ArrowForwardIosIcon /></button>
-                    <button onClick={() => navigate('/my-products')}><p><img src={productIcon} alt="Error :(" style={{width: '30'}} />Мои товары</p> <ArrowForwardIosIcon /></button>
-                    <button ><p><img src={exitIcon} alt="Error :(" style={{width: '30'}} />Выйти</p> <ArrowForwardIosIcon /></button>
+                    <button onClick={() => navigate('/profile_liked')}><p><img src={heartIcon} alt="Error :(" style={{width: '30'}} />Понравившиеся</p> <ArrowForwardIosIcon /></button>
+                    <button><p><img src={productIcon} alt="Error :(" style={{width: '30'}} />Мои товары</p> <ArrowForwardIosIcon /></button>
+                    <button><p><img src={exitIcon} alt="Error :(" style={{width: '30'}} />Выйти</p> <ArrowForwardIosIcon /></button>
                 </div>
             </div>
             <div className="profile__user">
                 <div className="back__btn">
                     <button><img src={backIcon} alt="Error :(" />Назад</button>
-                    <p>Понравившиеся</p>
+                    <p>Мои товары</p>
                 </div>
                 <div className="product__list">
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
+                    {
+                        my_products.map((product) => 
+                        <Card key={product.id} product={product} />
+                        )
+                    }
                 </div>
             </div>
         </div>
   )
 };
 
-export default ProfileLiked;
+export default MyProducts;

@@ -6,16 +6,14 @@ import { ToastContainer } from "react-toastify";
 import Header from "../../components/Header/Header";
 import AddProduct from "../AddCard/AddProduct";
 import CardShow from "../../components/Card/CardShow";
-import { addProduct } from "../../store/slices/products/productSlice";
+import { getProduct } from "../../store/slices/products/productSlice";
 import './main.scss'
 
 
 const Main = () => {
     const [open, setOpen] = useState(false);
 
-    const products = useSelector((state) => state.product);
-    console.log(products);
-
+    const { products } = useSelector((state) => state.product);
     const dispatch = useDispatch();
 
     const handleClickOpen = () => {
@@ -27,43 +25,19 @@ const Main = () => {
     };
 
     useEffect(() => {
-      dispatch(addProduct())
-    }, [])
+      dispatch(getProduct())
+    }, [dispatch])
 
   return (
     <div className="main">
       <ToastContainer />
         <Header handleClickOpen={handleClickOpen} />
         <div className="main__card">
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            <CardShow />
-            {/* {
-              products.map((item) => 
+            {
+              products?.map((item) => 
                 <CardShow key={item.id} item={item} />
               )
-            } */}
+            }
                  <Backdrop
                     sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                     open={open}
