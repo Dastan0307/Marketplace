@@ -3,14 +3,13 @@ import { Typography } from 'antd';
 import Backdrop from '@mui/material/Backdrop';
 import { HeartOutlined } from '@ant-design/icons';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { useDispatch } from "react-redux";
+import { ToastContainer } from "react-toastify";
 import hugeIcon from '../../assets/img/more-vertical.svg';
 import editIcon from '../../assets/img/Frame 851212066.svg'
 import deleteIcon from '../../assets/img/Frame 8512120661.svg'
 import EditCard from "../../screens/UpdateCard/EditCard";
 import DeleteCard from "../../screens/UpdateCard/DeleteCard";
 import AboutCard from "../../screens/UpdateCard/AboutCard";
-import { editCardProduct } from "../../store/slices/products/productSlice";
 import './card.scss';
 
 const { Paragraph } = Typography;
@@ -22,9 +21,7 @@ const ProductCard = ({ handleClickOpen, product }) => {
   const [openDelete, setOpenDelete] = useState(false);
   const [like, setLike] = useState(false);
   const [likeCount, setLikeCount] = useState(99);
-
-  const dispatch = useDispatch();
-
+  const [id, setId] = useState(null);
 
   const handleCloseAboutCard = () => {
     setOpenAboutCard(false);
@@ -42,10 +39,9 @@ const ProductCard = ({ handleClickOpen, product }) => {
     setOpenEdit(true);
   };
 
-  const openCardEdit = (id) => {
+  const openCardEdit = () => {
     setOpen(false)
     handleOpen()
-    dispatch(editCardProduct(id))
   }
 
   const openDeleteCard = () => {
@@ -56,10 +52,11 @@ const ProductCard = ({ handleClickOpen, product }) => {
     setOpenDelete(false)
   }
 
-  const openCardDelete = () => {
+  const openCardDelete = (id) => {
     setOpen(false)
     openDeleteCard()
-  }
+    setId(id)
+  };
 
   function handleDisLike() {
     setLike(false)
@@ -69,17 +66,21 @@ const ProductCard = ({ handleClickOpen, product }) => {
     setLike(true)
     setLikeCount(likeCount+1)
   };
+  function setOpenMenu(id) {
+    setOpen(true)
+  };
 
   return (
         <div className="card" >
+          <ToastContainer />
             <img
             className="card__img"
             alt="example"
             src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
             onClick={handleClickOpen}
             />
-            <p className="card__description" onClick={() => handleOpenAboutCard()} >{product.title}</p>
-            <p className="card__description_price" >{product.price} $</p>
+            <p className="card__description" onClick={() => handleOpenAboutCard()} >{product?.title}</p>
+            <p className="card__description_price" >{product?.price} $</p>
             <div className="card__fuctional">
                 <div style={{display: 'flex', justifyContent: 'center', marginTop: '5px'}}>
                   {
@@ -89,14 +90,14 @@ const ProductCard = ({ handleClickOpen, product }) => {
                   }
                   <Paragraph className="card__price">{ likeCount }</Paragraph>
                   </div>
-                <img src={hugeIcon} alt="error" width={24} style={{cursor: 'pointer'}} onClick={() => setOpen(true)} />
+                <img src={hugeIcon} alt="error" width={24} style={{cursor: 'pointer'}} onClick={() => setOpenMenu(product.id)} />
             </div>
             {
               open ? 
               <div className="card__btns">
-                <button  onClick={() => openCardEdit(product.id)}><img src={editIcon} alt="Error :(" />Изменить</button>
+                <button  onClick={() => openCardEdit()}><img src={editIcon} alt="Error :(" />Изменить</button>
                 <hr />
-                <button onClick={() => openCardDelete()}><img src={deleteIcon} alt="Error :(" />Удалить</button>
+                <button onClick={() => openCardDelete(product.id)}><img src={deleteIcon} alt="Error :(" />Удалить</button>
               </div>
             :
               ''
@@ -113,7 +114,7 @@ const ProductCard = ({ handleClickOpen, product }) => {
                   sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                   open={openDelete}
               >
-                  <DeleteCard closeDeleteCard={closeDeleteCard} />
+                  <DeleteCard closeDeleteCard={closeDeleteCard} id={id} />
               </Backdrop>
               {/* inforation about card  */}
               <Backdrop

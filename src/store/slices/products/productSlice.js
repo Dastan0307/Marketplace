@@ -57,12 +57,25 @@ export const getProductId = createAsyncThunk('product/getProductId', async (id) 
     }
 });
 
-export const editCardProduct = createAsyncThunk('product/getProductId', async (id) => {
+// export const editCardProduct = createAsyncThunk('product/editCardProduct', async ({ id, title, price,short_description, long_description }) => {
+//   let token = JSON.parse(localStorage.getItem('token'));
+// try {
+//   const Authorization = `Bearer ${token.access}`; //JWT
+//   const response = await axios.patch(`${API}/product/${id}/`, 
+//   { title, price,short_description, long_description },
+//   { headers: { Authorization } });
+//   return response.data;
+// } catch (error) {
+//   throw error; 
+// }
+// });
+
+export const deleteCard = createAsyncThunk('product/deleteCard', async ({ closeDeleteCard, id }) => {
   let token = JSON.parse(localStorage.getItem('token'));
 try {
   const Authorization = `Bearer ${token.access}`; //JWT
-  const response = await axios.patch(`${API}/product/${id}/`, 
-  { headers: { Authorization } });
+  const response = await axios.delete(`${API}/product/${id}/`, { headers: { Authorization } });
+  closeDeleteCard()
   return response.data;
 } catch (error) {
   throw error; 
@@ -94,6 +107,19 @@ const productSlice = createSlice({
       }) 
       .addCase(getMyProducts.fulfilled, (state, action) => {
         state.my_products = action.payload
+      }) 
+      // .addCase(editCardProduct.fulfilled, (state, action) => {
+      //   state.my_products = action.payload
+      //   toast.success('Продукт изменён')
+      // }) 
+      // .addCase(editCardProduct.rejected, (state, action) => {
+      //   toast.error('Продукт не было изменён')
+      // }) 
+      .addCase(deleteCard.fulfilled, (state, action) => {
+        toast.success('Продукт уделён')
+      }) 
+      .addCase(deleteCard.rejected, (state, action) => {
+        toast.warning('Продукт не удалён')
       }) 
     }})
   

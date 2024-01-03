@@ -43,7 +43,7 @@ const Main = () => {
                     open={open}
                 >
                     <ClearIcon className="card__close_icon" onClick={handleClose} />
-                    <AddProduct />
+                    <AddProduct handleClose={handleClose} />
                 </Backdrop>
         </div>
     </div>

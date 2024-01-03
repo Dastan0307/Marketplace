@@ -1,6 +1,7 @@
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
 import { useEffect } from 'react';
 import { getMyProducts } from '../../store/slices/products/productSlice';
 import profileIcon from '../../assets/img/Frame 851212073.svg';
@@ -28,6 +29,7 @@ const MyProducts = () => {
 
   return (
         <div className="container" >
+            <ToastContainer />
             <div className="profile__menu_list">
                 <div className="profile__user_name" onClick={() => navigate('/profile')}>
                     {
@@ -54,7 +56,7 @@ const MyProducts = () => {
                 </div>
                 <div className="product__list">
                     {
-                        my_products.map((product) => 
+                        my_products?.map((product) => 
                         <Card key={product.id} product={product} />
                         )
                     }

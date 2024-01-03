@@ -6,7 +6,7 @@ import addFotoIcon from '../../assets/img/Frame 851212085.svg'
 import { addProduct } from "../../store/slices/products/productSlice";  
 import './add_card.scss';
 
-const AddProduct = () => {
+const AddProduct = ({ handleClose }) => {
     const [title, setTitle] = useState('');
     const [price_card, setPrice] = useState('');
     const [short_description, setShortDescription] = useState('');
@@ -42,6 +42,7 @@ const AddProduct = () => {
       setShortDescription('')
       setLongDescription('')
       setFiles([])
+      handleClose()
     };
   
 
