@@ -14,7 +14,7 @@ const Header = ({ handleClickOpen }) => {
 
   return (
     <div className="header">
-        <img src={logo} alt="Error :(" style={{ width: '196px', height: '44px' }} />
+      <img src={logo} alt="Error :(" style={{ width: '196px', height: '44px' }} />
         <div className="header__btn">
             <PrimaryButton onClick={handleClickOpen}>Подать объявление</PrimaryButton>
             <div className="header__user"  >

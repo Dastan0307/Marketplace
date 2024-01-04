@@ -38,7 +38,12 @@ const Password = () => {
             <img src={authImg} alt="Error :(" className="main__img" />
             <div className="register__form">
             <div className="register__btns">
-                <a href="/register"><img src={shooterImg} alt="Error" className="register__choose_img" />Назад</a>
+                <a href="/register">
+                    <img src={shooterImg} 
+                    alt="Error" 
+                    className="register__choose_img" />
+                    Назад
+                </a>
                 <p>Регистрация</p>
                 {
                     showPassword ? 
@@ -53,12 +58,36 @@ const Password = () => {
                     {
                         showPassword ? 
                         <>
-                            <input type="text" placeholder="********" value={password} className="password__inp" onChange={(e) => setPassword(e.target.value)} />
-                            <input type="text" placeholder="********" value={password_check} className="password__inp" onChange={(e) => setPasswordCheck(e.target.value)} />
+                            <input 
+                                type="text" 
+                                placeholder="********" 
+                                value={password} 
+                                className="password__inp" 
+                                onChange={(e) => setPassword(e.target.value)} 
+                            />
+                            <input 
+                                type="text" 
+                                placeholder="********" 
+                                value={password_check} 
+                                className="password__inp" 
+                                onChange={(e) => setPasswordCheck(e.target.value)} 
+                            />
                         </>:
                         <>
-                            <input type="password" placeholder="********" value={password} className="password__inp" onChange={(e) => setPassword(e.target.value)} />
-                            <input type="password" placeholder="********" value={password_check} className="password__inp" onChange={(e) => setPasswordCheck(e.target.value)} />
+                            <input 
+                                type="password" 
+                                placeholder="********" 
+                                value={password} 
+                                className="password__inp" 
+                                onChange={(e) => setPassword(e.target.value)} 
+                            />
+                            <input 
+                                type="password" 
+                                placeholder="********" 
+                                value={password_check} 
+                                className="password__inp" 
+                                onChange={(e) => setPasswordCheck(e.target.value)} 
+                            />
                         </>
                     }
                     {
@@ -67,7 +96,9 @@ const Password = () => {
                         <p className="password__error_password">Пароли не совпадают</p>
                     }
                     {
-                        password === password_check ? 
+                        password === password_check || 
+                        password.length !== 8 || 
+                        password_check.length !== 8 ? 
                         <PrimaryButton onClick={handleRegistration}>Далее</PrimaryButton> :
                         <GreyButton>Далее</GreyButton> 
                     }

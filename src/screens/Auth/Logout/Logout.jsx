@@ -15,9 +15,9 @@ const Logout = ({ logoutCardClose }) => {
   return (
     <div className="logout">
         <img src={LogoutImg} alt="Error :(" width={130} />
-        <p>Вы действительно хотите выйти с приложения?</p>
-        <PrimaryButton onClick={handleLogout}>Выйти</PrimaryButton>
-        <Button shape="round" className="logout__btn" onClick={logoutCardClose}>Отмена</Button>
+          <p>Вы действительно хотите выйти с приложения?</p>
+            <PrimaryButton onClick={handleLogout}>Выйти</PrimaryButton>
+            <Button shape="round" className="logout__btn" onClick={logoutCardClose}>Отмена</Button>
     </div>
   )
 };

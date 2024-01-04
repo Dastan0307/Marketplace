@@ -47,28 +47,32 @@ const Timer = ({ phone_number, changePhoneNumberClose }) => {
         <>
             <div className="profile__check_number">
                 <h3>Изменить номер телефона</h3>
-                <img src={phoneIcon} alt="Error :(" style={{width:'80px', marginBottom: '40px'}} />
+                <img 
+                    src={phoneIcon} 
+                    alt="Error :(" 
+                    style={{width:'80px', marginBottom: '40px'}} 
+                />
                 <h4>Введите код из СМС</h4>
                 <input 
                     type="text" 
                     placeholder="0 0 0 0" 
                     value={code_activationn}
                     onKeyDown={handleEnterKeyPress}
-                    onChange={(e) => setCodeActivation(e.target.value)} />
+                    onChange={(e) => setCodeActivation(e.target.value)} 
+                />
                 {
-                timerEnd ? 
-                <div className="profile__timer">
-                    <p style={{ width: '156px', marginLeft: '2%', marginBottom: '0' }}>Повторный запрос</p>
-                    <p style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                        <img src={spinnerIcon} alt="Error" style={{width: '16px', color: 'rgba(192, 192, 192, 1)', marginRight: '5px'}} />
-                        {`00:${time < 10 ? "0" : ""}${time}`}
-                     </p>
-                </div> 
-                :
-                <button className="profile__checkNumber_btn" onClick={() => againStartTimer()}>Отправить код еще раз</button>
-
+                    timerEnd ? 
+                        <div className="profile__timer">
+                            <p style={{ width: '156px', marginLeft: '2%', marginBottom: '0' }}>Повторный запрос</p>
+                            <p style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                                <img src={spinnerIcon} alt="Error" style={{width: '16px', color: 'rgba(192, 192, 192, 1)', marginRight: '5px'}} />
+                                {`00:${time < 10 ? "0" : ""}${time}`}
+                            </p>
+                        </div> 
+                        :
+                        <button className="profile__checkNumber_btn" onClick={() => againStartTimer()}>Отправить код еще раз</button>
                 }
-                    </div>
+            </div>
         </>
   )
 };

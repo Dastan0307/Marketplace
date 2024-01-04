@@ -18,7 +18,6 @@ const MyProducts = () => {
     const dispatch = useDispatch();
     const { my_products } = useSelector((state) => state.product);
 
-
     const userImg = localStorage.getItem('user_photo');
     const username = localStorage.getItem('username');
     const email = localStorage.getItem('email');
@@ -44,9 +43,28 @@ const MyProducts = () => {
                     }
                 </div>
                 <div className="profile__menu_btns">
-                    <button onClick={() => navigate('/profile_liked')}><p><img src={heartIcon} alt="Error :(" style={{width: '30'}} />Понравившиеся</p> <ArrowForwardIosIcon /></button>
-                    <button><p><img src={productIcon} alt="Error :(" style={{width: '30'}} />Мои товары</p> <ArrowForwardIosIcon /></button>
-                    <button><p><img src={exitIcon} alt="Error :(" style={{width: '30'}} />Выйти</p> <ArrowForwardIosIcon /></button>
+                    <button 
+                        onClick={() => navigate('/profile_liked')}>
+                        <p>
+                            <img src={heartIcon} alt="Error :(" style={{width: '30'}} />
+                            Понравившиеся
+                        </p> 
+                        <ArrowForwardIosIcon />
+                    </button>
+                    <button>
+                        <p>
+                            <img src={productIcon} alt="Error :(" style={{width: '30'}} />
+                            Мои товары
+                        </p> 
+                        <ArrowForwardIosIcon />
+                    </button>
+                    <button>
+                        <p>
+                            <img src={exitIcon} alt="Error :(" style={{width: '30'}} />
+                            Выйти
+                        </p> 
+                        <ArrowForwardIosIcon />
+                    </button>
                 </div>
             </div>
             <div className="profile__user">

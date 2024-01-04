@@ -26,11 +26,28 @@ const EditProfile = ({ editProfileClose }) => {
     <div className="profile__update">
         <ToastContainer />
         <h3>Изменить профиль</h3>
-        <input type="text" placeholder="Имя" value={name} onChange={(e) => setName(e.target.value)} />
-        <input type="text" placeholder="Фамилия" value={last_name} onChange={(e) => setLastName(e.target.value)} />
-        <input type="text" placeholder="Дата рождения" value={birth_date} onChange={(e) => setBirthDate(e.target.value)} />
+        <input 
+          type="text" 
+          placeholder="Имя" 
+          value={name} 
+          onChange={(e) => setName(e.target.value)} 
+        />
+        <input 
+          type="text" 
+          placeholder="Фамилия" 
+          value={last_name} 
+          onChange={(e) => setLastName(e.target.value)} 
+        />
+        <input 
+          type="text" 
+          placeholder="Дата рождения" 
+          value={birth_date} 
+          onChange={(e) => setBirthDate(e.target.value)} 
+        />
         {
-            name != null | undefined || last_name != null | undefined || birth_date!= null | undefined ?
+            name != null | undefined || 
+            last_name != null | undefined || 
+            birth_date!= null | undefined ?
             <PrimaryButton onClick={handleEditProfile}>Изменить</PrimaryButton> :
             <GreyButton>Изменить</GreyButton> 
         }

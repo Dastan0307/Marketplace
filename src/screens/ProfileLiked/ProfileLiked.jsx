@@ -5,8 +5,8 @@ import heartIcon from '../../assets/img/Frame 851212065.svg';
 import productIcon from '../../assets/img/Frame 8512120651.svg';
 import exitIcon from '../../assets/img/Frame 8512120652.svg';
 import backIcon from '../../assets/img/Frame 851211999.svg';
-import './profile_liked.scss';
 import Card from '../../components/Card/Card';
+import './profile_liked.scss';
 
 
 const ProfileLiked = () => {
@@ -32,9 +32,28 @@ const ProfileLiked = () => {
                     }
                 </div>
                 <div className="profile__menu_btns">
-                    <button><p><img src={heartIcon} alt="Error :(" style={{width: '30'}} />Понравившиеся</p> <ArrowForwardIosIcon /></button>
-                    <button onClick={() => navigate('/my-products')}><p><img src={productIcon} alt="Error :(" style={{width: '30'}} />Мои товары</p> <ArrowForwardIosIcon /></button>
-                    <button ><p><img src={exitIcon} alt="Error :(" style={{width: '30'}} />Выйти</p> <ArrowForwardIosIcon /></button>
+                    <button>
+                        <p>
+                            <img src={heartIcon} alt="Error :(" style={{width: '30'}} />
+                            Понравившиеся
+                        </p>
+                        <ArrowForwardIosIcon />
+                    </button>
+                    <button 
+                        onClick={() => navigate('/my-products')}>
+                            <p>
+                                <img src={productIcon} alt="Error :(" style={{width: '30'}} />
+                                Мои товары
+                            </p> 
+                            <ArrowForwardIosIcon />
+                        </button>
+                    <button>
+                        <p>
+                            <img src={exitIcon} alt="Error :(" style={{width: '30'}} />
+                            Выйти
+                        </p> 
+                        <ArrowForwardIosIcon />
+                    </button>
                 </div>
             </div>
             <div className="profile__user">

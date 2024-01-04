@@ -48,10 +48,30 @@ const EditCard = ({ handleClose, id }) => {
                     <img src={snikersPicture} alt="Error :(" />
                 </div>
             </Carousel>
-            <input type="text" className='card__title' value={title} onChange={(e) => setTitle(e.target.value)} />
-            <input type="text" className='card__price' value={price_card} onChange={(e) => setPrice(e.target.value)} />
-            <input type="text" className='card__brend' value={short_description} onChange={(e) => setShortDescription(e.target.value)} />
-            <input type="text" className='card__edit_description' value={long_description} onChange={(e) => setLongDescription(e.target.value)} />
+            <input 
+                type="text" 
+                className='card__title' 
+                value={title} 
+                onChange={(e) => setTitle(e.target.value)} 
+            />
+            <input 
+                type="text" 
+                className='card__price' 
+                value={price_card} 
+                onChange={(e) => setPrice(e.target.value)} 
+            />
+            <input 
+                type="text" 
+                className='card__brend' 
+                value={short_description} 
+                onChange={(e) => setShortDescription(e.target.value)} 
+            />
+            <input 
+                type="text" 
+                className='card__edit_description' 
+                value={long_description} 
+                onChange={(e) => setLongDescription(e.target.value)} 
+            />
             <PrimaryButton >Сохранить</PrimaryButton>
         </div>
     </div>

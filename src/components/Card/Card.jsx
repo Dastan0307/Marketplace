@@ -90,26 +90,39 @@ const ProductCard = ({ handleClickOpen, product }) => {
                   }
                   <Paragraph className="card__price">{ likeCount }</Paragraph>
                   </div>
-                <img src={hugeIcon} alt="error" width={24} style={{cursor: 'pointer'}} onClick={() => setOpenMenu(product.id)} />
+                <img 
+                  src={hugeIcon} 
+                  alt="error" 
+                  width={24} 
+                  style={{cursor: 'pointer'}} 
+                  onClick={() => setOpenMenu(product.id)} />
             </div>
             {
               open ? 
               <div className="card__btns">
-                <button  onClick={() => openCardEdit()}><img src={editIcon} alt="Error :(" />Изменить</button>
+                <button  
+                  onClick={() => openCardEdit()}>
+                  <img src={editIcon} alt="Error :(" />
+                  Изменить
+                </button>
                 <hr />
-                <button onClick={() => openCardDelete(product.id)}><img src={deleteIcon} alt="Error :(" />Удалить</button>
+                <button 
+                  onClick={() => openCardDelete(product.id)}>
+                    <img src={deleteIcon} alt="Error :(" />
+                    Удалить
+                </button>
               </div>
             :
               ''
             }
-            {/* edit  */}
+            {/* edit card  */}
               <Backdrop
                   sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                   open={openEdit}
               >
                   <EditCard handleClose={handleClose} />
               </Backdrop>
-              {/* delete  */}
+              {/* delete card  */}
               <Backdrop
                   sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                   open={openDelete}

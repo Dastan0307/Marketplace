@@ -100,13 +100,6 @@ const ProfilePage = (props) => {
         setEditPhoneNumber(true);
     };
 
-    useEffect(() => {
-        if(localStorage.getItem('token')) {
-            dispatch(checkAuth());
-        };
-      }, [dispatch]);
-
-
     function handleNumber() {
         dispatch(addNumberUser(phone_number));
     };
@@ -116,6 +109,14 @@ const ProfilePage = (props) => {
         changePhoneNumberOpen()
         handleClose()
     };
+
+    useEffect(() => {
+        if(localStorage.getItem('token')) {
+            dispatch(checkAuth());
+        };
+      }, [dispatch]);
+
+
 
 
   return (
@@ -131,18 +132,48 @@ const ProfilePage = (props) => {
                 <p>{username ? username : ''}<br /><span>{email ? email : ''}</span></p>
             </div>
             <div className="profile__menu_btns">
-                <button onClick={() => navigate('/profile_liked')}><p><img src={heartIcon} alt="Error :(" style={{width: '30'}} />Понравившиеся</p> <ArrowForwardIosIcon /></button>
-                <button onClick={() => navigate('/my-products')}><p><img src={productIcon} alt="Error :(" style={{width: '30'}} />Мои товары</p> <ArrowForwardIosIcon /></button>
-                <button onClick={logoutCardOpen}><p><img src={exitIcon} alt="Error :(" style={{width: '30'}} />Выйти</p> <ArrowForwardIosIcon /></button>
+                <button 
+                    onClick={() => navigate('/profile_liked')}>
+                    <p>
+                        <img src={heartIcon} alt="Error :(" style={{width: '30'}} />
+                        Понравившиеся
+                    </p> 
+                    <ArrowForwardIosIcon />
+                </button>
+                <button 
+                    onClick={() => navigate('/my-products')}>
+                    <p>
+                        <img src={productIcon} alt="Error :(" style={{width: '30'}} />
+                        Мои товары
+                    </p>
+                    <ArrowForwardIosIcon />
+                </button>
+                <button 
+                    onClick={logoutCardOpen}>
+                    <p>
+                        <img src={exitIcon} alt="Error :(" style={{width: '30'}} />
+                        Выйти
+                    </p> 
+                    <ArrowForwardIosIcon />
+                </button>
             </div>
         </div>
         <div className="profile__user">
             <div className="back__btn">
-                <button onClick={() => navigate('/')} ><img src={backIcon} alt="Error :(" />Назад</button>
+                <button 
+                    onClick={() => navigate('/')} >
+                    <img src={backIcon} alt="Error :(" />
+                    Назад
+                </button>
                 <p>Профиль</p>
             </div>
             <div className="profile__img">
-                <input onChange={handleChange} ref={inpRef} type="file" style={{display: 'none'}} />
+                <input 
+                    onChange={handleChange} 
+                    ref={inpRef} 
+                    type="file" 
+                    style={{display: 'none'}} 
+                />
                 {
                     userImg ? 
                     <>
@@ -166,7 +197,9 @@ const ProfilePage = (props) => {
                 {birth_date ? <p className="profile__active_text">{ birth_date }</p> : <p>Дата рождения</p>}
             </div>
                 {
-                    name != null | undefined || last_name != null | undefined || birth_date!= null | undefined ?
+                    name != null | undefined || 
+                    last_name != null | undefined || 
+                    birth_date!= null | undefined ?
                     <button className="profile__btn_update" onClick={editProfileOpen}>Изменить профиль</button> :
                     <button className="profile__btn_update" onClick={addProfileOpen}>Добавить профиль</button> 
                 }
@@ -175,8 +208,12 @@ const ProfilePage = (props) => {
                 user_number ?
                     <button 
                         className="profile__contact_btn" 
-                        onClick={editPhoneNumberOpen}>Изменить номер
-                            <strong style={{ color: 'rgba(73, 73, 73, 1)', fontSize: '20px' }}>{user_number}</strong> 
+                        onClick={editPhoneNumberOpen}>
+                        Изменить номер
+                        <strong 
+                            style={{ color: 'rgba(73, 73, 73, 1)', fontSize: '20px' }}>
+                            {user_number}
+                        </strong> 
                     </button>
                     :
                     <button 

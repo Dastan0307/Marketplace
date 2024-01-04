@@ -50,33 +50,49 @@ const AddProduct = ({ handleClose }) => {
 
   return (
     <>
-        <div className="card__add">
-          <ToastContainer />
-            <div className="card__add_img">
+      <div className="card__add">
+        <ToastContainer />
+          <div className="card__add_img">
             <input
                 type="file"
                 onChange={handleChange}
                 ref={inpRef}
                 style={{display: 'none'}}
             />
-                <img src={addFotoIcon} alt="Error :("  onClick={()=>{ inpRef.current.click() }} /> 
-                { photo.map((item, index) => (
-                    <img src={item} alt="Error :(" key={index} style={{width: '76px', height: '96px', borderRadius: '12px'}} />
-                )) }
-            </div>
-                <input type="text" placeholder="Цена" value={price_card} onChange={(e) => setPrice(e.target.value)} />
-                <input type="text" placeholder="Название" value={title} onChange={(e) => setTitle(e.target.value)} />
-                <input type="text" placeholder="Краткое описание" value={short_description} onChange={(e) => setShortDescription(e.target.value)} />
-                <input type="text" placeholder="Полное описание" value={long_description} onChange={(e) => setLongDescription(e.target.value)} />
-            {
-                price_card.length === 0 || 
-                title.length === 0 || 
-                short_description.length === 0 || 
-                long_description.length === 0 ? 
-                <GreyButton>Добавить</GreyButton> :
-                <PrimaryButton onClick={handleAddProduct}>Добавить</PrimaryButton> 
-            }
-        </div>
+            <img src={addFotoIcon} alt="Error :("  onClick={()=>{ inpRef.current.click() }} /> 
+            { photo.map((item, index) => (
+                <img src={item} alt="Error :(" key={index} style={{width: '76px', height: '96px', borderRadius: '12px'}} />
+            )) }
+          </div>
+          <input 
+            type="text" 
+            placeholder="Цена" 
+            value={price_card} 
+            onChange={(e) => setPrice(e.target.value)} />
+          <input 
+            type="text" 
+            placeholder="Название" 
+            value={title} 
+            onChange={(e) => setTitle(e.target.value)} />
+          <input 
+            type="text" 
+            placeholder="Краткое описание"
+            value={short_description} 
+            onChange={(e) => setShortDescription(e.target.value)} />
+          <input 
+            type="text" 
+            placeholder="Полное описание" 
+            value={long_description} 
+            onChange={(e) => setLongDescription(e.target.value)} />
+          {
+            price_card.length === 0 || 
+            title.length === 0 || 
+            short_description.length === 0 || 
+            long_description.length === 0 ? 
+            <GreyButton>Добавить</GreyButton> :
+            <PrimaryButton onClick={handleAddProduct}>Добавить</PrimaryButton> 
+          }
+      </div>
     </>
   )
 };

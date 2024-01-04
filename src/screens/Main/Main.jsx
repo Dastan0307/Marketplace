@@ -33,18 +33,18 @@ const Main = () => {
       <ToastContainer />
         <Header handleClickOpen={handleClickOpen} />
         <div className="main__card">
-            {
-              products?.map((item) => 
-                <CardShow key={item.id} item={item} />
-              )
-            }
-                 <Backdrop
-                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                    open={open}
-                >
-                    <ClearIcon className="card__close_icon" onClick={handleClose} />
-                    <AddProduct handleClose={handleClose} />
-                </Backdrop>
+          {
+            products?.map((item) => 
+              <CardShow key={item.id} item={item} />
+            )
+          }
+          <Backdrop
+            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={open}
+          >
+              <ClearIcon className="card__close_icon" onClick={handleClose} />
+              <AddProduct handleClose={handleClose} />
+          </Backdrop>
         </div>
     </div>
   )

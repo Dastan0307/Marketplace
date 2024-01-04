@@ -36,14 +36,14 @@ export const getProduct = createAsyncThunk('product/getProduct', async () => {
 });
 
 export const getMyProducts = createAsyncThunk('product/getMyProducts', async () => {
-  let token = JSON.parse(localStorage.getItem('token'));
-try {
-  const Authorization = `Bearer ${token.access}`; //JWT
-  const response = await axios.get(`${API}/products_user/`, { headers: { Authorization } });
-  return response.data;
-} catch (error) {
-  throw error; 
-}
+      let token = JSON.parse(localStorage.getItem('token'));
+    try {
+      const Authorization = `Bearer ${token.access}`; //JWT
+      const response = await axios.get(`${API}/products_user/`, { headers: { Authorization } });
+      return response.data;
+    } catch (error) {
+      throw error; 
+    }
 });
 
 export const getProductId = createAsyncThunk('product/getProductId', async (id) => {
@@ -71,15 +71,15 @@ export const getProductId = createAsyncThunk('product/getProductId', async (id) 
 // });
 
 export const deleteCard = createAsyncThunk('product/deleteCard', async ({ closeDeleteCard, id }) => {
-  let token = JSON.parse(localStorage.getItem('token'));
-try {
-  const Authorization = `Bearer ${token.access}`; //JWT
-  const response = await axios.delete(`${API}/product/${id}/`, { headers: { Authorization } });
-  closeDeleteCard()
-  return response.data;
-} catch (error) {
-  throw error; 
-}
+      let token = JSON.parse(localStorage.getItem('token'));
+    try {
+      const Authorization = `Bearer ${token.access}`; //JWT
+      const response = await axios.delete(`${API}/product/${id}/`, { headers: { Authorization } });
+      closeDeleteCard()
+      return response.data;
+    } catch (error) {
+      throw error; 
+    }
 });
 
 
