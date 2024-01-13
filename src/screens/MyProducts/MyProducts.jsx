@@ -24,7 +24,7 @@ const MyProducts = () => {
 
     useEffect(() => {
         dispatch(getMyProducts())
-    }, [dispatch]);
+    }, [dispatch, my_products, ]);
 
   return (
         <div className="container" >
