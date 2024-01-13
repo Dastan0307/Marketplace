@@ -5,6 +5,7 @@ import Backdrop from '@mui/material/Backdrop';
 import ClearIcon from '@mui/icons-material/Clear';
 import { ToastContainer } from "react-toastify";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import InputMask from 'react-input-mask';
 import profileIcon from '../../assets/img/Frame 851212073.svg';
 import heartIcon from '../../assets/img/Frame 851212065.svg';
 import productIcon from '../../assets/img/Frame 8512120651.svg';
@@ -28,7 +29,7 @@ const ProfilePage = (props) => {
     const [editProfile, setEditProfile] = useState(false);
     const [editPhoneNumber, setEditPhoneNumber] = useState(false);
     const [photos, setPhotos] = useState('');
-    const [files, setFiles] = useState([])
+    const [files, setFiles] = useState([]);
 
     const dispatch = useDispatch();
     const inpRef = useRef();
@@ -240,20 +241,25 @@ const ProfilePage = (props) => {
                     <EditProfile editProfileClose={editProfileClose} />
                 </Backdrop> 
                 
-                {/* add number  */}
+                {/* add phone number  */}
                 <Backdrop
                     sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                     open={open}
                 >
                     <ClearIcon className="profile__clear_icon" onClick={handleClose} />
                     <div className="profile__edit_number">
-                        <h3 className="profile__title">Изменить номер телефона</h3>
+                        <h3 className="profile__title">Добавить номер телефона</h3>
                         <img src={phoneIcon} alt="Error :(" style={{width:'80px', marginBottom: '40px'}} />
                         <h4>Введите номер телефона</h4>
                         <p className="profile__contact_p">Мы отправим вам СМС с кодом подтверждения</p>
-                        <input type="text" placeholder="0(000) 000 000" onChange={(e) => setPhoneNumber(e.target.value)} />
+                        <InputMask
+                            value={phone_number}
+                            onChange={(e) => setPhoneNumber(e.target.value)} 
+                            mask="0(999) 999-999" 
+                            placeholder="0 (999) 999-999"
+                        />
                         {
-                            phone_number.length === 10 ? 
+                            phone_number.length > 0 ? 
                             <button onClick={checkPhoneNumber} style={{background: 'rgba(84, 88, 234, 1)'}} 
                             >Далее</button> : 
                             <button style={{background: 'rgba(247, 247, 248, 1)'}}>Далее</button>

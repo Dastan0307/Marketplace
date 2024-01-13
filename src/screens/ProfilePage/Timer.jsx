@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from 'react-redux';
+import InputMask from 'react-input-mask';
 import { addNumberUser, sendCode } from '../../store/slices/auth/authSlice';
 import spinnerIcon from '../../assets/img/Frame 861.svg';
 import phoneIcon from '../../assets/img/Frame 860.svg';
@@ -53,12 +54,12 @@ const Timer = ({ phone_number, changePhoneNumberClose }) => {
                     style={{width:'80px', marginBottom: '40px'}} 
                 />
                 <h4>Введите код из СМС</h4>
-                <input 
-                    type="text" 
-                    placeholder="0 0 0 0" 
+                <InputMask
                     value={code_activationn}
                     onKeyDown={handleEnterKeyPress}
                     onChange={(e) => setCodeActivation(e.target.value)} 
+                    mask="9999" 
+                    placeholder="0000"
                 />
                 {
                     timerEnd ? 
