@@ -5,7 +5,7 @@ import phoneIcon from '../../assets/img/Frame 860.svg';
 
 export const EditPhoneNumber = ({ editPhoneNumberclose }) => {
     const editPhone = localStorage.getItem('phone_number');
-    const [phone_number, setEditNumber] = useState(editPhone);
+    const [phone_number, setEditNumber] = useState(editPhone | null);
 
     const dispatch = useDispatch();
 
@@ -26,7 +26,7 @@ export const EditPhoneNumber = ({ editPhoneNumberclose }) => {
                 onChange={(e) => setEditNumber(e.target.value)} 
             />
             {
-                phone_number !== null || undefined ? 
+                phone_number === null || phone_number === undefined || phone_number.length === 10 ? 
                 <button onClick={handleEditPhoneNumber} style={{background: 'rgba(84, 88, 234, 1)'}} 
                 >Далее</button> : 
                 <button style={{background: 'rgba(247, 247, 248, 1)'}}>Далее</button>

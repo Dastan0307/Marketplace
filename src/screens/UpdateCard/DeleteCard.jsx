@@ -9,7 +9,6 @@ import { useDispatch } from 'react-redux';
 
 const DeleteCard = ({ closeDeleteCard, id }) => {
   const dispatch = useDispatch();
-  console.log(id);
   
   function deleteCardProduct() {
     dispatch(deleteCard({ closeDeleteCard, id }))

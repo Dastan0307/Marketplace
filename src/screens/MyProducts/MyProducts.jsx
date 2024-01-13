@@ -69,7 +69,7 @@ const MyProducts = () => {
             </div>
             <div className="profile__user">
                 <div className="back__btn">
-                    <button><img src={backIcon} alt="Error :(" />Назад</button>
+                    <button onClick={() => navigate('/profile')}><img src={backIcon} alt="Error :(" />Назад</button>
                     <p>Мои товары</p>
                 </div>
                 <div className="product__list">

@@ -10,7 +10,7 @@ import './card.scss';
 
 const { Paragraph } = Typography;
 
-const CardShow = ({ handleClickOpen, item } ) => {
+const CardShow = ({ item } ) => {
   const [openAboutCard, setOpenAboutCard] = useState(false);
   const [like, setLike] = useState(false);
   const [likeCount, setLikeCount] = useState(99);
@@ -20,7 +20,7 @@ const CardShow = ({ handleClickOpen, item } ) => {
     setOpenAboutCard(false);
   };
   
-  const handleOpenAboutCard = (id) => {
+  const handleOpenAboutCard = async (id) => {
     setOpenAboutCard(true);
     dispatch(getProductId(id))
   };
@@ -43,9 +43,10 @@ const CardShow = ({ handleClickOpen, item } ) => {
           className="card__img"
           alt="example"
           src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-          onClick={handleClickOpen}
+          onClick={() => handleOpenAboutCard(item.id)}
+          style={{cursor: 'pointer'}}
           />
-          <p className="card__description" onClick={() => handleOpenAboutCard(item.id)} >{item?.title}</p>
+          <p className="card__description" >{item?.title}</p>
           <p className="card__description_price" >{item?.price} $</p>
           <div className="card__fuctional">
             <div style={{display: 'flex', justifyContent: 'center', marginTop: '5px'}}>

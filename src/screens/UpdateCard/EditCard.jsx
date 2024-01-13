@@ -1,40 +1,47 @@
-import React, { useState } from "react";
+import { useEffect, useState } from 'react';
 import ClearIcon from '@mui/icons-material/Clear';
 import { Carousel } from 'antd';
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer } from "react-toastify";
-import { editCardProduct } from "../../store/slices/products/productSlice";
+import { editCardProduct, getProductId } from "../../store/slices/products/productSlice";
 import snikersPicture from '../../assets/img/image 2.png'
 import { PrimaryButton } from '../../components/Button/Button';
 import '../ProfileLiked/profile_liked.scss';
 
 const EditCard = ({ handleClose, id }) => {
-    const { about_product } = useSelector((state) => state.product);
-
     const dispatch = useDispatch();
+    const getProductById = useSelector(state => state.product.about_product);
 
-    const [title, setTitle] = useState(about_product.title);
-    const [price_card, setPrice] = useState(about_product.price);
-    const [short_description, setShortDescription] = useState(about_product.short_description);
-    const [long_description, setLongDescription] = useState(about_product.long_description);
+    const [title, setTitle] = useState('');
+    const [price_card, setPrice] = useState('');
+    const [short_description, setShortDescription] = useState('');
+    const [long_description, setLongDescription] = useState('');
 
+    useEffect(() => {
+        setTitle(getProductById?.title);
+        setPrice(getProductById?.price);
+        setShortDescription(getProductById?.short_description);
+        setLongDescription(getProductById?.long_description);
+    }, [getProductById, id, ]);
 
-    const onChange = (currentSlide) => {
-        console.log(currentSlide);
+    useEffect(() => {
+        dispatch(getProductId(id))
+    }, [dispatch, id ]);
+
+    function editProductCard() {
+        const price = Number(price_card)
+        dispatch(
+            editCardProduct(
+                { id, title, price, short_description, long_description, handleClose }
+            ))
     };
-
-    // function editProductCard() {
-    //     const price = Number(price_card)
-    //     dispatch(editCardProduct({ id, title, price,short_description, long_description }))
-    // };
     
-
   return (
     <div>
         <ClearIcon className="card__icon" onClick={handleClose} />
         <ToastContainer />
         <div className="card__edit">
-            <Carousel afterChange={onChange} className='card__carousel'>
+            <Carousel className='card__carousel'>
                 <div>
                     <img src={snikersPicture} alt="Error :(" />
                 </div>
@@ -72,7 +79,7 @@ const EditCard = ({ handleClose, id }) => {
                 value={long_description} 
                 onChange={(e) => setLongDescription(e.target.value)} 
             />
-            <PrimaryButton >Сохранить</PrimaryButton>
+            <PrimaryButton onClick={editProductCard}>Сохранить</PrimaryButton>
         </div>
     </div>
   )

@@ -35,7 +35,6 @@ const AddProduct = ({ handleClose }) => {
 
     function handleAddProduct() {
       const price = Number(price_card);
-      const photo = files;
       dispatch(addProduct({ title, price, short_description, long_description, likes }))
       setTitle('')
       setPrice('')

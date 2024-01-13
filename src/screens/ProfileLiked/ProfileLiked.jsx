@@ -58,7 +58,7 @@ const ProfileLiked = () => {
             </div>
             <div className="profile__user">
                 <div className="back__btn">
-                    <button><img src={backIcon} alt="Error :(" />Назад</button>
+                    <button onClick={() => navigate('/profile')} ><img src={backIcon} alt="Error :(" />Назад</button>
                     <p>Понравившиеся</p>
                 </div>
                 <div className="product__list">

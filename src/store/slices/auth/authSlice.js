@@ -53,7 +53,7 @@ export const checkAuth = createAsyncThunk('auth/checkAuth', async () => {
        { headers: { Authorization } });
       localStorage.setItem('token', JSON.stringify({ refresh: token.refresh, access: response.data.access }));
   } catch (error) {
-      console.log('Error', error);
+      toast.errorx('Error', error);
   };
 });
 

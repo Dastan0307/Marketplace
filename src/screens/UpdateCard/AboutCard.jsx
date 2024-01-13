@@ -9,14 +9,11 @@ import '../ProfileLiked/profile_liked.scss';
 const AboutCard = ({ handleCloseAboutCard, id }) => {
     const { about_product } = useSelector((state) => state.product);
 
-    const onChange = (currentSlide) => {
-        console.log(currentSlide);
-    };
   return (
     <div>
         <ClearIcon className="card__icon" onClick={handleCloseAboutCard} />
         <div className="card__edit">
-            <Carousel afterChange={onChange} className='card__carousel'>
+            <Carousel className='card__carousel'>
                 <div>
                     <img src={snikersPicture} alt="Error :(" />
                 </div>

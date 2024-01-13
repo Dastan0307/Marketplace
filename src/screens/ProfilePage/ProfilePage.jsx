@@ -274,7 +274,7 @@ const ProfilePage = (props) => {
                     sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
                     open={editPhoneNumber}
                 >
-                    <ClearIcon className="profile__icon_checkNumber" onClick={editPhoneNumberclose} />
+                    <ClearIcon className="profile__icon_edit" onClick={editPhoneNumberclose} />
                     <EditPhoneNumber editPhoneNumberclose={editPhoneNumberclose} />
                 </Backdrop> 
                 {/* exit  */}
