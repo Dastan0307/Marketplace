@@ -3,7 +3,7 @@ import TextField from '@mui/material/TextField';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useDispatch } from 'react-redux';
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import { useNavigate } from 'react-router-dom';
 import { loginUserAsync } from '../../../store/slices/auth/authSlice';
 import { GreyButton, PrimaryButton } from "../../../components/Button/Button";
@@ -29,7 +29,6 @@ const Login = () => {
 
   return (
     <div className="container">
-        <ToastContainer />
         <div className="login">
             <img src={authImg} alt="Error :(" className="main__img" />
             <div className="login__form">
@@ -72,7 +71,7 @@ const Login = () => {
                     {
                         username.length === 0 || password.length === 0 ? 
                         <GreyButton>Войти</GreyButton> :
-                        <PrimaryButton onClick={handleLogin}>Войти</PrimaryButton> 
+                        <PrimaryButton onClick={handleLogin}>Войти</PrimaryButton>
                     }
                     <a href="/register" style={{ color: 'rgba(84, 88, 234, 1)', margin: '160px 0 -140px 10px' }}>Зарегистрироваться</a>
                 </form>

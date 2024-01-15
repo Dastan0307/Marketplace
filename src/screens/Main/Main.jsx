@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Backdrop from '@mui/material/Backdrop';
 import ClearIcon from '@mui/icons-material/Clear';
-import { ToastContainer } from "react-toastify";
 import Header from "../../components/Header/Header";
 import AddProduct from "../AddCard/AddProduct";
 import CardShow from "../../components/Card/CardShow";
@@ -30,7 +29,6 @@ const Main = () => {
 
   return (
     <div className="main">
-      <ToastContainer />
         <Header handleClickOpen={handleClickOpen} />
         <div className="main__card">
           {

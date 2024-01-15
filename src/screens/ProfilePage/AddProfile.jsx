@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { GreyButton, PrimaryButton } from "../../components/Button/Button";
 import { updateUserProfile } from "../../store/slices/profile/profileSlice";
-import { ToastContainer } from "react-toastify";
 
 const AddProfile = ({ addProfileClose }) => {
     const [name, setName] = useState('');
@@ -20,7 +19,6 @@ const AddProfile = ({ addProfileClose }) => {
 
   return (
     <div className="profile__update">
-        <ToastContainer />
         <h3>Изменить профиль</h3>
         <input 
           type="text" 

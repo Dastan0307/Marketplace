@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import ClearIcon from '@mui/icons-material/Clear';
 import { Carousel } from 'antd';
 import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer } from "react-toastify";
 import { editCardProduct, getProductId } from "../../store/slices/products/productSlice";
 import snikersPicture from '../../assets/img/image 2.png'
 import { PrimaryButton } from '../../components/Button/Button';
@@ -39,7 +38,6 @@ const EditCard = ({ handleClose, id }) => {
   return (
     <div>
         <ClearIcon className="card__icon" onClick={handleClose} />
-        <ToastContainer />
         <div className="card__edit">
             <Carousel className='card__carousel'>
                 <div>

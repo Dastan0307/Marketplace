@@ -3,10 +3,7 @@ import { Typography } from 'antd';
 import Backdrop from '@mui/material/Backdrop';
 import { HeartOutlined } from '@ant-design/icons';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { ToastContainer } from "react-toastify";
-import hugeIcon from '../../assets/img/more-vertical.svg';
-import editIcon from '../../assets/img/Frame 851212066.svg'
-import deleteIcon from '../../assets/img/Frame 8512120661.svg'
+import { hugeIcon, editIcon, deleteIcon} from '../../assets'
 import EditCard from "../../screens/UpdateCard/EditCard";
 import DeleteCard from "../../screens/UpdateCard/DeleteCard";
 import './card.scss';
@@ -64,7 +61,6 @@ const ProductCard = ({ product }) => {
 
   return (
         <div className="card" >
-          <ToastContainer />
             <img
             className="card__img"
             alt="example"

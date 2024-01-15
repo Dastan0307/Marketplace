@@ -3,16 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import Backdrop from '@mui/material/Backdrop';
 import ClearIcon from '@mui/icons-material/Clear';
-import { ToastContainer } from "react-toastify";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import InputMask from 'react-input-mask';
-import profileIcon from '../../assets/img/Frame 851212073.svg';
-import heartIcon from '../../assets/img/Frame 851212065.svg';
-import productIcon from '../../assets/img/Frame 8512120651.svg';
-import exitIcon from '../../assets/img/Frame 8512120652.svg';
-import backIcon from '../../assets/img/Frame 851211999.svg';
-import phoneIcon from '../../assets/img/Frame 860.svg';
 import Logout from "../../screens/Auth/Logout/Logout";
+import { 
+    profileIcon, 
+    heartIcon,
+    productIcon,
+    exitIcon,
+    backIcon,
+    phoneIcon
+} from '../../assets';
 import { checkAuth, addNumberUser } from '../../store/slices/auth/authSlice';
 import Timer from "./Timer";
 import AddProfile from "./AddProfile";
@@ -122,7 +123,6 @@ const ProfilePage = (props) => {
 
   return (
     <div className="container" >
-        <ToastContainer />
         <div className="profile__menu_list">
             <div className="profile__user_name" >
                 {

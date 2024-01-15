@@ -1,9 +1,8 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
 import './header.scss';
-import logo from '../../assets/img/Frame 851212101.svg'
+import { logo, headerIcon } from "../../assets";
 import { PrimaryButton } from "../Button/Button";
-import headerIcon from '../../assets/img/Frame 8512120732.svg';
 
 const Header = ({ handleClickOpen }) => {
   const navigate = useNavigate();

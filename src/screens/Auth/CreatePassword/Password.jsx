@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { registerUserAsync } from '../../../store/slices/auth/authSlice';
 import { GreyButton, PrimaryButton } from "../../../components/Button/Button";
-import authImg from '../../../assets/img/Photo background.png';
-import shooterImg from '../../../assets/img/Frame 851211998.svg'
-import keyIcon from '../../../assets/img/Frame1861.svg'
+import { authImg, shooterImg, keyIcon } from "../../../assets";
 import "react-toastify/dist/ReactToastify.css";
 import '../auth.scss';
 
@@ -34,7 +32,6 @@ const Password = () => {
   return (
     <div className="container">
         <div className="password">
-        <ToastContainer />
             <img src={authImg} alt="Error :(" className="main__img" />
             <div className="register__form">
             <div className="register__btns">

@@ -1,10 +1,12 @@
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useNavigate } from "react-router-dom";
-import profileIcon from '../../assets/img/Frame 851212073.svg';
-import heartIcon from '../../assets/img/Frame 851212065.svg';
-import productIcon from '../../assets/img/Frame 8512120651.svg';
-import exitIcon from '../../assets/img/Frame 8512120652.svg';
-import backIcon from '../../assets/img/Frame 851211999.svg';
+import { 
+    profileIcon, 
+    heartIcon,
+    productIcon,
+    exitIcon,
+    backIcon 
+} from '../../assets';
 import Card from '../../components/Card/Card';
 import './profile_liked.scss';
 

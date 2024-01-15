@@ -1,6 +1,5 @@
 import { useRef, useState } from "react";
 import { useDispatch } from 'react-redux';
-import { ToastContainer } from "react-toastify";
 import { GreyButton, PrimaryButton } from "../../components/Button/Button";
 import addFotoIcon from '../../assets/img/Frame 851212085.svg'
 import { addProduct } from "../../store/slices/products/productSlice";  
@@ -50,7 +49,6 @@ const AddProduct = ({ handleClose }) => {
   return (
     <>
       <div className="card__add">
-        <ToastContainer />
           <div className="card__add_img">
             <input
                 type="file"
